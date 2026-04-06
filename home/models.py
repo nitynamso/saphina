@@ -165,12 +165,14 @@ class TextWithImageBlock(blocks.StructBlock):
     class Meta:
         template = 'blocks/texto_con_imagen.html'
         icon = 'doc-empty-inverse'
+        label = 'Text with image'
 
 class CategoryGridBlock(blocks.StructBlock):
     title = blocks.CharBlock(default="Our categories")
     class Meta:
         template = 'blocks/grilla_categorias.html'
         icon = 'list-ul'
+        
 
 class LogoCarouselBlock(blocks.StructBlock):
     title = blocks.CharBlock(default="One single supplier")
