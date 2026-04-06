@@ -1,0 +1,39 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<section class="bg-cardBg py-20 lg:py-28">
+    <div class="w-full max-w-[100rem] mx-auto px-[5%] lg:px-[2.5%]">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-[3rem] items-start">
+            
+            <div class="w-full">
+                {% image self.image fill-900x1000 as img %}
+                <img src="{{ img.url }}" alt="{{ img.alt }}" class="w-full h-auto object-cover block shadow-sm">
+            </div>
+
+            <div>
+                <h3 class="text-[2.5rem] lg:text-[4rem] leading-[1.2] lg:leading-[4.2rem] font-medium text-[#333] mb-6">
+                    {{ self.title|linebreaksbr }}
+                </h3>
+                
+                <div class="text-[1.2rem] lg:text-[1.4rem] leading-relaxed text-[#333] mb-6">
+                    {{ self.intro_text|richtext }}
+                </div>
+
+                {% if self.benefits %}
+                <ul class="flex flex-col gap-5 mt-10">
+                    {% for benefit in self.benefits %}
+                    <li class="flex items-start gap-4 text-[1.2rem] lg:text-[1.3rem] font-semibold text-[#333] leading-snug">
+                        <svg class="shrink-0 w-6 h-6 mt-1" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="12" fill="#FFD731"/>
+                            <path d="M9.43627 14.6045C9.43627 14.6045 6.95183 12.8142 4 12.1626L9.74787 19L19.9972 5.00439C19.9972 5.00439 12.8541 9.06895 9.43627 14.6045Z" fill="black"/>
+                        </svg>
+                        <span>{{ benefit }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+</section>

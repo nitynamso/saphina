@@ -1,0 +1,60 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<section class="bg-white py-20 lg:py-28 font-sans" id="sobre-nosotros">
+    <div class="w-full max-w-[1700px] mx-auto px-[5%] lg:px-[2.5%]">
+        
+        <div class="text-center mb-16 lg:mb-24">
+            <h2 class="text-[1.6rem] lg:text-[2.2rem] font-normal text-[#333] leading-tight">
+                <span class="text-primary font-bold">{{ self.resaltado_amarillo }}</span>{{ self.texto_secundario }}
+            </h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-[5rem] items-start">
+            
+            <div class="order-2 lg:order-1">
+                <h3 class="text-[2.4rem] lg:text-[3.6rem] leading-tight lg:leading-[1.1] font-bold text-[#1a1a1a] mb-8 tracking-tight">
+                    {{ self.titulo_grande|richtext }}
+                </h3>
+                
+                <div class="text-[1.25rem] lg:text-[1.4rem] leading-relaxed text-[#333] mb-6 font-normal">
+                    {{ self.parrafos|richtext }}
+                </div>
+
+                {% if self.beneficios %}
+                <ul class="flex flex-col gap-5 mt-10">
+                    {% for item in self.beneficios %}
+                    <li class="flex items-start gap-4 text-[1.15rem] lg:text-[1.3rem] font-semibold text-[#333] leading-snug">
+                        <svg class="shrink-0 w-6 h-6 mt-[4px]" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="12" fill="#FFD731"></circle>
+                            <path d="M9.43627 14.6045C9.43627 14.6045 6.95183 12.8142 4 12.1626L9.74787 19L19.9972 5.00439C19.9972 5.00439 12.8541 9.06895 9.43627 14.6045Z" fill="black"></path>
+                        </svg>
+                        <span>{{ item }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+
+            <div class="w-full order-1 lg:order-2">
+                {% if self.imagen %}
+                    {% image self.imagen original class="w-full h-auto object-cover block shadow-md" %}
+                {% endif %}
+            </div>
+        </div> 
+        
+        {% if self.boton_texto %}
+        <div class=" mt-20 max-w-7xl text-center mx-auto">
+            <div class="text-[1.15rem] lg:text-[1.4rem] leading-relaxed mb-8 text-[#333]">
+                {{ self.texto_pie|richtext }}
+            </div>
+            
+            <a href="{{ self.boton_url }}" target="_blank" 
+               class="inline-block bg-dark  text-primary font-bold py-5 px-14 text-[1.1rem] rounded transition-all hover:-translate-y-1 hover:bg-primary hover:text-dark hover:shadow-xl uppercase tracking-wider">
+                {{ self.boton_texto }}
+            </a>
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+</section>

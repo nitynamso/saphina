@@ -1,0 +1,54 @@
+{% load wagtailimages_tags %}
+
+<section class="bg-grayAlt py-12 lg:py-24 text-center">
+    <div class="w-full max-w-premium mx-auto px-[5%]">
+        
+        <div class="mb-10 lg:mb-16">
+            <h2 class="text-[1.8rem] lg:text-[2.5rem] font-bold text-dark leading-tight">{{ self.title }}</h2>
+            <p class="text-[1.1rem] lg:text-[1.5rem] font-normal text-dark">{{ self.subtitle }}</p>
+        </div>
+        
+        {% if self.brands %}
+        <div class="brands-wrapper relative w-full mx-auto mb-10 lg:mb-16 overflow-hidden py-8 mask-fade">
+            <div class="flex items-center track-animation">
+                <!-- Primera copia de logos -->
+                {% for brand in self.brands %}
+                <div class="slide-item px-6 flex justify-center items-center">
+                    {% if brand.logo_image %}
+                        {% image brand.logo_image height-50 as logo_img %}
+                        <img src="{{ logo_img.url }}" 
+                             class="max-h-[30px] lg:max-h-[50px] object-contain grayscale opacity-80 transition-all hover:grayscale-0 hover:opacity-100 hover:scale-105" 
+                             alt="{{ brand.alt_text|default:'' }}">
+                    {% elif brand.logo_url %}
+                        <img src="{{ brand.logo_url }}" 
+                             class="max-h-[30px] lg:max-h-[50px] object-contain grayscale opacity-80 transition-all hover:grayscale-0 hover:opacity-100 hover:scale-105" 
+                             alt="{{ brand.alt_text|default:'' }}">
+                    {% endif %}
+                </div>
+                {% endfor %}
+                <!-- Segunda copia para efecto infinito -->
+                {% for brand in self.brands %}
+                <div class="slide-item px-6 flex justify-center items-center">
+                    {% if brand.logo_image %}
+                        {% image brand.logo_image height-50 as logo_img %}
+                        <img src="{{ logo_img.url }}" 
+                             class="max-h-[30px] lg:max-h-[50px] object-contain grayscale opacity-80 transition-all hover:grayscale-0 hover:opacity-100 hover:scale-105" 
+                             alt="{{ brand.alt_text|default:'' }}">
+                    {% elif brand.logo_url %}
+                        <img src="{{ brand.logo_url }}" 
+                             class="max-h-[30px] lg:max-h-[50px] object-contain grayscale opacity-80 transition-all hover:grayscale-0 hover:opacity-100 hover:scale-105" 
+                             alt="{{ brand.alt_text|default:'' }}">
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <a href="{{ self.button_url }}" 
+           class="inline-block bg-dark text-white hover:text-dark hover:bg-primary font-medium py-4 px-10 text-[1.1rem] rounded transition-all hover:-translate-y-1 hover:shadow-xl">
+            {{ self.button_text }}
+        </a>
+
+    </div>
+</section>

@@ -1,0 +1,33 @@
+{% load wagtailimages_tags %}
+
+<section class="py-16 lg:py-24 w-full bg-white">
+    <div class="max-w-[125rem] mx-auto px-[3%]">
+        <div class="grid grid-cols-1 lg:grid-cols-2 w-full overflow-hidden shadow-2xl">
+            
+            <!-- Columna de texto (fondo negro) -->
+            <div class="bg-[#000000] text-white flex flex-col justify-center py-16 px-8 lg:py-24 lg:px-16 xl:px-24">
+                <div class="max-w-[{{ self.text_max_width }}] mx-auto lg:mx-0">
+                    <h2 class="text-[2.5rem] lg:text-[4rem] font-bold leading-[1.1] mb-6">
+                        {{ self.title|safe }}
+                    </h2>
+                    <h3 class="text-[1.3rem] lg:text-[1.5rem] font-bold leading-snug mb-6">
+                        {{ self.subtitle|safe }}
+                    </h3>
+                    <p class="text-[1.05rem] lg:text-[1.15rem] leading-relaxed text-gray-300">
+                        {{ self.paragraph|linebreaksbr }}
+                    </p>
+                </div>
+            </div>
+
+            <!-- Columna de imagen -->
+            <div class="relative w-full h-[540px] lg:h-auto min-h-[400px] lg:min-h-[1024px]">
+                {% if self.image %}
+                    {% image self.image original class="absolute inset-0 w-full h-full object-cover" %}
+                {% elif self.image_url %}
+                    <img src="{{ self.image_url }}" alt="{{ self.title|striptags }}" class="absolute inset-0 w-full h-full object-cover">
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+</section>

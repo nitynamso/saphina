@@ -1,0 +1,22 @@
+{% load wagtailimages_tags %}
+
+<section class="py-16 lg:py-24 bg-white">
+    <div class="max-w-premium mx-auto px-[5%]">
+        {% if value.title %}
+            <h2 class="text-[2.5rem] lg:text-[3.5rem] font-bold text-dark text-center mb-12">{{ value.title }}</h2>
+        {% endif %}
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {% for category in lista_categorias %}
+                <a href="{{ category.url|default:'#' }}" class="group block p-6 border border-gray-200 rounded-lg hover:border-primary hover:shadow-lg transition-all text-center">
+                    {% if category.icon_external %}
+                        <img src="{{ category.icon_external }}" alt="{{ category.name }}" class="h-12 w-auto mx-auto mb-4 object-contain group-hover:scale-110 transition-transform">
+                    {% elif category.icon %}
+                        {% image category.icon max-100x100 class="h-12 w-auto mx-auto mb-4 object-contain group-hover:scale-110 transition-transform" %}
+                    {% endif %}
+                    <span class="text-[1.1rem] font-semibold text-dark">{{ category.name }}</span>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>

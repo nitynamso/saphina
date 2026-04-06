@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+    {% for block in page.body %}
+        {% include_block block %}  {# ¡Wagtail busca automáticamente el template! #}
+    {% endfor %}
+
+    {% include "includes/footer.html" %}
+{% endblock %}

@@ -1,0 +1,52 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% if header %}
+    <div style="background-color: {{ header.bg_color }}; color: {{ header.text_color }};"
+         class="flex flex-col lg:flex-row justify-center items-center gap-2 lg:gap-12 py-3 px-4 font-semibold text-sm relative z-[1001] text-center">
+        <div>
+            <i class="fa-solid fa-location-dot mr-1"></i> 
+            {{ header.address }}
+        </div>
+        <div class="border py-1 px-3" style="border-color: {{ header.text_color }};">
+            <i class="fa-solid fa-phone mr-1"></i> 
+            {{ header.phone }}
+        </div>
+    </div>
+
+    <header class="absolute top-[80px] lg:top-[60px] left-0 w-full flex justify-between items-center px-6 lg:px-[5%] py-4 z-[100]">
+        <div class="z-[1002]">
+            <a href="/">
+                {% if header.logo %}
+                    {% image header.logo original as main_logo %}
+                    <img src="{{ main_logo.url }}" 
+                         style="height: auto; width: {{ header.logo_width }}px;" 
+                         class="object-contain" 
+                         alt="Logo">
+                {% else %}
+                    <span class="text-white font-bold text-2xl">SaphinaGroup</span>
+                {% endif %}
+            </a>
+        </div>
+        
+        <nav id="mobileMenu" class="fixed lg:relative top-0 -right-full lg:right-0 w-full lg:w-auto h-screen lg:h-auto bg-dark lg:bg-transparent flex flex-col lg:flex-row justify-center lg:justify-end items-center transition-all duration-500 ease-in-out z-[1000] lg:z-auto px-8 lg:px-0 gap-0 lg:gap-8">
+            <ul class="flex flex-col lg:flex-row text-center lg:text-left w-full lg:w-auto text-xl lg:text-lg gap-0 lg:gap-6">
+                <li class="relative py-4 lg:py-0 border-b border-white/15 lg:border-none w-full lg:w-auto">
+                    <a href="/" class="text-white font-semibold hover:text-primary transition-colors block">Home</a>
+                </li>
+                <li class="relative py-4 lg:py-0 border-b border-white/15 lg:border-none w-full lg:w-auto">
+                    <a href="/sobre-nosotros/" class="text-white font-semibold hover:text-primary transition-colors block">About Us</a>
+                </li>
+                <li class="relative py-4 lg:py-0 border-b border-white/15 lg:border-none w-full lg:w-auto">
+                    <a href="/preguntas-frecuentes/" class="text-white font-semibold hover:text-primary transition-colors block">FAQs</a>
+                </li>
+                <li class="relative py-4 lg:py-0 border-b border-white/15 lg:border-none w-full lg:w-auto">
+                    <a href="/contacto/" class="text-white font-semibold hover:text-primary transition-colors block">Contact Us</a>
+                </li>
+            </ul>
+        </nav>
+
+        <button id="hamburgerBtn" class="block lg:hidden text-white text-3xl z-[1002] bg-transparent border-none cursor-pointer">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </header>
+{% endif %}

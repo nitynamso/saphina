@@ -1,0 +1,19 @@
+{% load wagtailimages_tags %}
+
+{% image value.image original as bg_image %}
+<section class="relative h-[100vh] lg:h-[85vh] w-full overflow-hidden bg-black flex items-center justify-center text-center px-[5%]">
+    <div class="absolute inset-0 w-full h-full bg-cover bg-center opacity-60 z-0" 
+         style="background-image: url('{{ bg_image.url }}');">
+    </div>
+    <div class="absolute inset-0 bg-black/40 z-10 pointer-events-none"></div>
+    <div class="relative z-20 max-w-[800px] mt-16">
+        <h1 class="text-white text-[3rem] lg:text-[4.5rem] font-extrabold leading-[1.1] mb-6 drop-shadow-lg">
+            {{ value.title }}
+        </h1>
+        {% if value.subtitle %}
+            <p class="text-[1.2rem] lg:text-[1.5rem] font-normal text-gray-200 leading-relaxed">
+                {{ value.subtitle|linebreaksbr }}
+            </p>
+        {% endif %}
+    </div>
+</section>

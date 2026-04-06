@@ -1,0 +1,107 @@
+{% load static wagtailcore_tags wagtailuserbar navigation_tags %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+            {% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}
+        {% endblock %}
+        {% block title_suffix %}
+            {% wagtail_site as current_site %}
+            {% if current_site and current_site.site_name %} - {{ current_site.site_name }}{% endif %}
+        {% endblock %}
+    </title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.4/build/css/intlTelInput.css">
+    <link rel="stylesheet" href="{% static 'css/cms.css' %}">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FAD02C',
+                        dark: '#1a1a1a',
+                        textDark: '#333333',
+                    },
+                    fontFamily: { sans: ['Roboto', 'sans-serif'] },
+                    maxWidth: { 'premium': '87.5rem' },
+                }
+            }
+        }
+    </script>
+
+    <style>
+       
+        .clip-btn { clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%); }
+        
+       
+        .mask-fade {
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+        
+        .brands-wrapper {
+            --slide-width: 250px;
+            --slide-count: 7;
+        }
+        @media (max-width: 1024px) { .brands-wrapper { --slide-width: 180px; } }
+        @media (max-width: 640px) { .brands-wrapper { --slide-width: 120px; } }
+        
+        .track-animation {
+            width: calc(var(--slide-width) * var(--slide-count) * 2);
+            animation: scrollBrands 30s linear infinite;
+        }
+        .track-animation:hover { animation-play-state: paused; }
+        .slide-item { width: var(--slide-width); }
+        
+        @keyframes scrollBrands {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(var(--slide-width) * var(--slide-count) * -1)); }
+        }
+
+        /* Clases para JS (Menú Móvil y Sliders) */
+        .mobile-menu-open { right: 0 !important; }
+        .slide-active { opacity: 1 !important; z-index: 10 !important; }
+
+          .accordion-content { max-height: 0; transition: max-height 0.4s ease-out; }
+        .accordion-item.active .accordion-content { max-height: 500px; }
+        .accordion-item.active .accordion-icon { transform: rotate(180deg); color: #FAD02C; }
+        .iti { width: 100%; }
+  .iti__search-input { padding: 8px; border-radius: 4px; border: 1px solid #ccc; }
+    </style>
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="font-sans text-textDark bg-white overflow-x-hidden">
+
+    {% wagtailuserbar %}
+
+    {% get_global_header %}
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.4/build/js/intlTelInput.min.js"></script>
+    <script>
+    const inputPhone = document.querySelector("#telefono");
+  window.intlTelInput(inputPhone, {
+    initialCountry: "us", 
+    separateDialCode: true, 
+    utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.4/build/js/utils.js",
+  });
+    
+</script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

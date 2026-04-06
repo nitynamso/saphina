@@ -1,0 +1,109 @@
+{% load wagtailcore_tags wagtailimages_tags wagtailsettings_tags %}
+
+{% get_settings %}
+
+<section class="bg-[#FAFAFA] py-16 lg:py-20" id="formContact">
+    <div class="w-full max-w-premium mx-auto px-[5%] grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        
+        <div class="w-full order-2 lg:order-1">
+            <div class="mb-10">
+                <h2 class="text-[2.5rem] lg:text-[3rem] font-light text-dark leading-[1.1] mb-4">
+                    {{ value.heading }}
+                </h2>
+                <div class="text-[0.95rem] leading-relaxed text-[#555] max-w-[90%] prose-p:mb-2">
+                    {{ value.description|richtext }}
+                </div>
+            </div>
+
+            <form action="https://api.web3forms.com/submit" method="POST" class="flex flex-col gap-4">
+                
+                <input type="hidden" name="access_key" value="{{ settings.home.SiteSettings.web3forms_key }}">
+
+                <input type="text" name="nombre" placeholder="FULL NAME *" required
+                       class="w-full bg-white border border-gray-300 rounded p-4 text-gray-900 text-[1rem] placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all shadow-sm">
+
+                <input type="email" name="email" placeholder="Email *" required
+                       class="w-full bg-white border border-gray-300 rounded p-4 text-gray-900 text-[1rem] placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all shadow-sm">
+
+                <div class="relative">
+                    <select name="categoria" required class="w-full bg-white border border-gray-300 rounded p-4 text-gray-900 text-[1rem] appearance-none focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all cursor-pointer shadow-sm">
+                        <option value="" disabled selected class="text-gray-500">CATEGORY OF INTEREST *</option>
+                        <option value="perfumes">PERFUMES</option>
+                        <option value="toys">TOYS</option>
+                        <option value="tools">TOOLS</option>
+                        <option value="technology">TECHNOLOGY</option>
+                        <option value="home_kitchen">HOME & KITCHEN</option>
+                        <option value="sports_outdoors">SPORTS & OUTDOORS</option>
+                        <option value="gardening">GARDENING</option>
+                        <option value="other">OTHER</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none"></i>
+                </div>
+
+                <input type="text" name="tipo_negocio" placeholder="PHYSICAL STORE OR ONLINE STORE?" 
+                       class="w-full bg-white border border-gray-300 rounded p-4 text-gray-900 text-[1rem] placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all shadow-sm">
+
+                <input type="tel" id="telefono" name="telefono" placeholder="TELEPHONE NUMBER"
+                       class="w-full bg-white border border-gray-300 rounded p-4 text-gray-900 text-[1rem] placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all shadow-sm">
+
+                <div class="relative">
+                    <select name="country" required class="w-full bg-white border border-gray-300 rounded p-4 text-gray-900 text-[1rem] appearance-none focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all cursor-pointer shadow-sm">
+                        <option value="" disabled selected class="text-gray-500">FROM WHICH COUNTRY DO YOU REQUIRE OUR SERVICES?*</option>
+                         <option value="United States">🇺🇸 United States</option>
+        <option value="Venezuela">🇻🇪 Venezuela</option>
+        
+        <option value="Argentina">🇦🇷 Argentina</option>
+        <option value="Bolivia">🇧🇴 Bolivia</option>
+        <option value="Brazil">🇧🇷 Brazil</option>
+        <option value="Canada">🇨🇦 Canada</option>
+        <option value="Chile">🇨🇱 Chile</option>
+        <option value="Colombia">🇨🇴 Colombia</option>
+        <option value="Costa Rica">🇨🇷 Costa Rica</option>
+        <option value="Cuba">🇨🇺 Cuba</option>
+        <option value="Dominican Republic">🇩🇴 Dominican Republic</option>
+        <option value="Ecuador">🇪🇨 Ecuador</option>
+        <option value="El Salvador">🇸🇻 El Salvador</option>
+        <option value="France">🇫🇷 France</option>
+        <option value="Guatemala">🇬🇹 Guatemala</option>
+        <option value="Honduras">🇭🇳 Honduras</option>
+        <option value="Italy">🇮🇹 Italy</option>
+        <option value="Mexico">🇲🇽 Mexico</option>
+        <option value="Nicaragua">🇳🇮 Nicaragua</option>
+        <option value="Panama">🇵🇦 Panama</option>
+        <option value="Paraguay">🇵🇾 Paraguay</option>
+        <option value="Peru">🇵🇪 Peru</option>
+        <option value="Portugal">🇵🇹 Portugal</option>
+        <option value="Puerto Rico">🇵🇷 Puerto Rico</option>
+        <option value="Spain">🇪🇸 Spain</option>
+        <option value="United Kingdom">🇬🇧 United Kingdom</option>
+        <option value="Uruguay">🇺🇾 Uruguay</option>
+        
+        <option value="Other">🌍 Other country</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none"></i>
+                </div>
+
+                <textarea name="mensaje" placeholder="MESSAGE *" rows="4" required
+                          class="w-full bg-white border border-gray-300 rounded p-4 text-gray-900 text-[1rem] placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all resize-y shadow-sm"></textarea>
+
+                <button type="submit" class="w-full bg-primary text-black font-bold text-[1.1rem] py-4 rounded hover:bg-[#e6be20] transition-colors shadow-lg mt-2">
+                    Send
+                </button>
+                
+            </form>
+        </div>
+
+        <div class="w-full h-full min-h-[300px] lg:min-h-[600px] order-first lg:order-last">
+            
+            {% if value.image_url %}
+                <img src="{{ value.image_url }}" class="w-full h-full object-cover rounded shadow-md" alt="Imagen desde URL">
+            {% elif value.imagen %}
+                {% image value.imagen original as img %}
+                <img src="{{ img.url }}" class="w-full h-full object-cover rounded shadow-md" alt="{{ img.alt }}">
+            {% else %}
+                {% endif %}
+
+        </div>
+
+    </div>
+</section>

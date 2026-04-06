@@ -1,0 +1,9 @@
+{% load wagtailcore_tags %}
+
+<a href="{{ value.link }}" 
+   class="inline-flex items-center justify-center px-8 py-3 font-semibold text-sm uppercase tracking-wider transition-all duration-300 clip-btn
+          {% if value.style == 'primary' %}bg-primary text-dark hover:bg-yellow-400
+          {% elif value.style == 'dark' %}bg-dark text-white hover:bg-gray-800
+          {% elif value.style == 'outline' %}border-2 border-dark text-dark hover:bg-dark hover:text-white{% endif %}">
+    {{ value.text }}
+</a>

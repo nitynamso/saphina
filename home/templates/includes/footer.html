@@ -1,0 +1,53 @@
+{% load wagtailcore_tags wagtailimages_tags home_tags %}
+
+{% get_global_header as header_global %}  
+  <footer class="bg-dark text-white pt-16 lg:pt-20 pb-8">
+        <div class="max-w-premium mx-auto px-[5%] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-16">
+            
+            <div>
+                <a href="/" class="inline-block mb-6">
+                {% if header_global and header_global.logo %}
+                    {% image header_global.logo width-400 as footer_logo %}
+                    <img src="{{ footer_logo.url }}" alt="Logo" class="w-[250px] lg:w-[314px] h-auto">
+                {% else %}
+                    <span class="text-2xl font-bold text-white">SaphinaGroup</span>
+                {% endif %}
+            </a>
+            </div>
+
+            <div>
+                <h3 class="text-primary font-bold text-[1.1rem] uppercase tracking-wider mb-6">QUICK LINKS</h3>
+                <ul class="flex flex-col gap-3">
+                    <li><a href="/" class="text-gray-300 hover:text-primary transition-colors text-[1rem]">Home</a></li>
+                    <li><a href="/sobre-nosotros/" class="text-gray-300 hover:text-primary transition-colors text-[1rem]">About Us</a></li>
+                    
+                    <li><a href="/preguntas-frecuentes" class="text-gray-300 hover:text-primary transition-colors text-[1rem]">FAQS</a></li>
+                    <li><a href="/contacto" class="text-gray-300 hover:text-primary transition-colors text-[1rem]">Contact Us</a></li>
+                   
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-primary font-bold text-[1.1rem] uppercase tracking-wider mb-6">CONTACT</h3>
+                <ul class="flex flex-col gap-4">
+                    {% if header_global and header_global.address %}
+                    <li class="flex items-start gap-3">
+                        <i class="fa-solid fa-location-dot text-primary mt-1 text-[1.1rem]"></i>
+                        <span class="text-gray-300 text-[1rem] leading-relaxed">{{ header_global.address }}</span>
+                    </li>
+                    {% endif %}
+                    {% if header_global and header_global.phone %}
+                    <li class="flex items-start gap-3">
+                        <i class="fa-solid fa-phone text-primary mt-1 text-[1.1rem]"></i>
+                        <span class="text-gray-300 text-[1rem]">{{ header_global.phone }}</span>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="border-t border-white/10 pt-8 text-center px-[5%]">
+            <p class="text-gray-400 text-[0.95rem]">Copyright © 2024 - {% now "Y" %} SaphinaGroup.com</p>
+        </div>
+    </footer>

@@ -1,0 +1,28 @@
+{% load wagtailimages_tags %}
+
+<section class="bg-primary py-16 lg:py-36">
+    <div class="w-full max-w-categories mx-auto px-[5%]">
+        <h2 class="text-center text-[2.2rem] lg:text-[2.5rem] font-medium text-dark mb-10 lg:mb-16">
+            {{ self.title }}
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+            {% for category in self.categories %}
+                 
+                  <div class="bg-[#F8F8FF] p-5 lg:p-6 flex items-center gap-6 rounded text-dark hover:-translate-y-1 hover:shadow-xl transition-all">
+                    <span class="shrink-0 w-10 h-10 flex items-center justify-center">
+                        {% if category.icon_image %}
+                            {% image category.icon_image width-40 height-40 as icon_img %}
+                            <img src="{{ icon_img.url }}" class="w-full h-full" alt="{{ category.name }}">
+                        {% elif category.icon_url %}
+                            <img src="{{ category.icon_url }}" class="w-full h-full" alt="{{ category.name }}">
+                        {% endif %}
+                    </span>
+                    <span class="text-base font-normal uppercase tracking-wide leading-tight">
+                        {{ category.name|linebreaksbr }}
+                    </span>
+               </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

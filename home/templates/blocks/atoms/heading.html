@@ -1,0 +1,14 @@
+{% load wagtailcore_tags %}
+
+<{{ self.level }} class="font-bold text-dark mb-4 tracking-tight {{ self.margin_top }}
+    {% if self.level == 'h2' %}
+        text-[2.2rem] lg:text-[3.2rem] leading-[1.1]
+    {% elif self.level == 'h3' %}
+        text-[1.8rem] lg:text-[2.4rem] leading-tight
+    {% else %}
+        text-[1.3rem] lg:text-[1.6rem] leading-normal
+    {% endif %}">
+    
+    {{ self.text }}
+
+</{{ self.level }}>

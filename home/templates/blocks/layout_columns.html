@@ -1,0 +1,19 @@
+{% load wagtailcore_tags %}
+
+<section class="py-16 lg:py-24 bg-white">
+    <div class="max-w-premium mx-auto  grid grid-cols-1 lg:grid-cols-12 gap-12 {{ self.vertical_align }}">
+        
+        <div class="{% if self.layout == '50_50' %}lg:col-span-6{% elif self.layout == '33_66' %}lg:col-span-4{% else %}lg:col-span-8{% endif %}">
+            {% for child in self.left_column %}
+                {{ child }}
+            {% endfor %}
+        </div>
+
+        <div class="{% if self.layout == '50_50' %}lg:col-span-6{% elif self.layout == '33_66' %}lg:col-span-8{% else %}lg:col-span-4{% endif %}">
+            {% for child in self.right_column %}
+                {{ child }}
+            {% endfor %}
+        </div>
+
+    </div>
+</section>

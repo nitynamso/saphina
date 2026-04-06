@@ -1,0 +1,72 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<section class="bg-white py-16 lg:py-24">
+    <div class="max-w-[100rem] mx-auto px-[5%]">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-20 items-center">
+            
+            <div class="w-full lg:col-span-3 flex flex-col items-start">
+                
+                <div class="mb-12 lg:mb-16">
+                    {% if value.subtitle %}
+                    <span class="text-[0.75rem] uppercase tracking-[0.2em] text-gray-400 font-bold mb-4 block align-left">
+                        {{ value.subtitle }}
+                    </span>
+                    {% endif %}
+                    
+                    <h2 class="text-[2.5rem] lg:text-[4.5rem] font-bold text-dark leading-[1.1] mb-2 align-left">
+                        {{ value.title_part_1 }}
+                    </h2>
+                    <h2 class="text-[2.5rem] lg:text-[4.5rem] font-bold leading-[1.1] align-left text-primary">
+                        {{ value.title_part_2 }}
+                    </h2>
+                </div>
+                
+                <div class="relative w-full transition-transform duration-500 hover:scale-105 origin-left">
+                    {% image value.image original as img %}
+                    <img src="{{ img.url }}" 
+                         alt="{{ img.alt }}" 
+                         class="w-full h-auto drop-shadow-3xl">
+                </div>
+            </div>
+
+            <div class="w-full lg:col-span-2 flex flex-col gap-5 lg:pl-10">
+                
+                {% for item in value.accordion_items %}
+                <div class="border-b border-gray-100 group">
+                    <button onclick="toggleAccordion(this)" class="w-full py-7 flex justify-between items-center text-left focus:outline-none">
+                        <span class="text-[1.1rem] lg:text-[1.3rem] font-bold text-dark group-hover:text-primary transition-colors">
+                            {{ item.title }}
+                        </span>
+                        <div class="w-7 h-7 rounded-full border-2 border-primary flex items-center justify-center text-primary transition-transform duration-300 accordion-icon">
+                            <i class="fa-solid fa-plus text-xs"></i>
+                        </div>
+                    </button>
+                    <div class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out accordion-content">
+                        <p class="pb-7 text-gray-500 leading-relaxed text-[1rem] lg:text-[1.15rem]">
+                            {{ item.description }}
+                        </p>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<script>
+    function toggleAccordion(button) {
+        const content = button.nextElementSibling;
+        const icon = button.querySelector('.accordion-icon');
+
+        if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+            content.style.maxHeight = '0px';
+            icon.style.transform = 'rotate(0deg)';
+        } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+            icon.style.transform = 'rotate(45deg)';
+        }
+    }
+</script>

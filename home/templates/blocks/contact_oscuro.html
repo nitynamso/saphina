@@ -1,0 +1,113 @@
+{% load wagtailcore_tags wagtailsettings_tags %}
+
+{% get_settings %}
+
+<section class="bg-[#0d1117] py-16 lg:py-24 border-t border-white/5">
+    <div class="max-w-premium mx-auto px-[5%] grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+        
+        <div class="w-full lg:pr-8">
+            <h2 class="text-[2.5rem] lg:text-[3.5rem] font-bold text-white leading-tight mb-8">
+                {{ value.heading }}
+            </h2>
+            
+            <div class="flex flex-col gap-5 mb-10">
+                {% if value.info_contacto.address %}
+                <div class="flex items-start gap-4">
+                    <i class="fa-solid fa-location-dot text-primary text-xl mt-1"></i>
+                    <span class="text-gray-200 text-[1.1rem]">{{ value.info_contacto.address }}</span>
+                </div>
+                {% endif %}
+                
+                {% if value.info_contacto.phone %}
+                <div class="flex items-center gap-4">
+                    <i class="fa-solid fa-phone text-primary text-xl"></i>
+                    <span class="text-gray-200 text-[1.1rem]">{{ value.info_contacto.phone }}</span>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="text-[1.05rem] lg:text-[1.15rem] leading-relaxed text-gray-400 prose-p:mb-4">
+                {{ value.description|richtext }}
+            </div>
+        </div>
+
+        <div class="w-full">
+            <form action="https://api.web3forms.com/submit" method="POST" class="flex flex-col gap-4">
+                
+                <input type="hidden" name="access_key" value="{{ settings.home.SiteSettings.web3forms_key }}">
+
+                <input type="text" name="nombre" placeholder="Nombre*" required
+                       class="w-full bg-white/5 border border-white/10 rounded p-4 text-white text-[1rem] placeholder-gray-500 focus:outline-none focus:border-primary focus:bg-white/10 transition-all">
+
+                <input type="email" name="email" placeholder="Correo electrónico*" required
+                       class="w-full bg-white/5 border border-white/10 rounded p-4 text-white text-[1rem] placeholder-gray-500 focus:outline-none focus:border-primary focus:bg-white/10 transition-all">
+
+               <div class="relative">
+                    <select name="categoria" required class="w-full bg-white border border-gray-300 rounded p-4 text-gray-900 text-[1rem] appearance-none focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all cursor-pointer shadow-sm">
+                        <option value="" disabled selected class="text-gray-500">CATEGORY OF INTEREST *</option>
+                        <option value="perfumes">PERFUMES</option>
+                        <option value="toys">TOYS</option>
+                        <option value="tools">TOOLS</option>
+                        <option value="technology">TECHNOLOGY</option>
+                        <option value="home_kitchen">HOME & KITCHEN</option>
+                        <option value="sports_outdoors">SPORTS & OUTDOORS</option>
+                        <option value="gardening">GARDENING</option>
+                        <option value="other">OTHER</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none"></i>
+                </div>
+                <input type="text" name="tipo_negocio" placeholder="¿Tienda física o vender en internet?" 
+                       class="w-full bg-white/5 border border-white/10 rounded p-4 text-white text-[1rem] placeholder-gray-500 focus:outline-none focus:border-primary focus:bg-white/10 transition-all">
+
+                <input type="tel" id="telefono" name="telefono" placeholder="Número de teléfono"
+                       class="w-full bg-white/5 border border-white/10 rounded p-4 text-white text-[1rem] placeholder-gray-500 focus:outline-none focus:border-primary focus:bg-white/10 transition-all">
+
+                  <div class="relative">
+                    <select name="country" required class="w-full bg-white border border-gray-300 rounded p-4 text-gray-900 text-[1rem] appearance-none focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all cursor-pointer shadow-sm">
+                        <option value="" disabled selected class="text-gray-500">FROM WHICH COUNTRY DO YOU REQUIRE OUR SERVICES?*</option>
+                         <option value="United States">🇺🇸 United States</option>
+        <option value="Venezuela">🇻🇪 Venezuela</option>
+        
+        <option value="Argentina">🇦🇷 Argentina</option>
+        <option value="Bolivia">🇧🇴 Bolivia</option>
+        <option value="Brazil">🇧🇷 Brazil</option>
+        <option value="Canada">🇨🇦 Canada</option>
+        <option value="Chile">🇨🇱 Chile</option>
+        <option value="Colombia">🇨🇴 Colombia</option>
+        <option value="Costa Rica">🇨🇷 Costa Rica</option>
+        <option value="Cuba">🇨🇺 Cuba</option>
+        <option value="Dominican Republic">🇩🇴 Dominican Republic</option>
+        <option value="Ecuador">🇪🇨 Ecuador</option>
+        <option value="El Salvador">🇸🇻 El Salvador</option>
+        <option value="France">🇫🇷 France</option>
+        <option value="Guatemala">🇬🇹 Guatemala</option>
+        <option value="Honduras">🇭🇳 Honduras</option>
+        <option value="Italy">🇮🇹 Italy</option>
+        <option value="Mexico">🇲🇽 Mexico</option>
+        <option value="Nicaragua">🇳🇮 Nicaragua</option>
+        <option value="Panama">🇵🇦 Panama</option>
+        <option value="Paraguay">🇵🇾 Paraguay</option>
+        <option value="Peru">🇵🇪 Peru</option>
+        <option value="Portugal">🇵🇹 Portugal</option>
+        <option value="Puerto Rico">🇵🇷 Puerto Rico</option>
+        <option value="Spain">🇪🇸 Spain</option>
+        <option value="United Kingdom">🇬🇧 United Kingdom</option>
+        <option value="Uruguay">🇺🇾 Uruguay</option>
+        
+        <option value="Other">🌍 Other country</option>
+                    </select>
+                    <i class="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none"></i>
+                </div>
+
+
+                <textarea name="mensaje" placeholder="Describa su consulta*" rows="4" required
+                          class="w-full bg-white/5 border border-white/10 rounded p-4 text-white text-[1rem] placeholder-gray-500 focus:outline-none focus:border-primary focus:bg-white/10 transition-all resize-y"></textarea>
+
+                <button type="submit" class="w-full bg-primary text-[#0d1117] font-bold text-[1.1rem] py-4 rounded hover:bg-[#e6be20] transition-colors shadow-lg mt-2">
+                    Enviar
+                </button>
+                
+            </form>
+        </div>
+    </div>
+</section>

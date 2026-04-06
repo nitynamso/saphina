@@ -1,0 +1,46 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<section class="relative h-[80vh] w-full overflow-hidden bg-black" id="hero-slider">
+    
+    {% if self.logo %}
+        <div class="absolute {{ self.logo_position }} z-30 pointer-events-none">
+            {% image self.logo original as logo_img %}
+            <img src="{{ logo_img.url }}" class="{{ self.logo_width }} h-auto drop-shadow-2xl" alt="Logo">
+        </div>
+    {% endif %}
+
+    {% for slide in self.slides %}
+        {% image slide.image original as bg_image %}
+        <div class="hero-slide absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out {% if forloop.first %}opacity-100 z-10 slide-active{% else %}opacity-0 z-0{% endif %}">
+            
+            <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" 
+                 style="background-image: url('{{ bg_image.url }}');">
+            </div>
+            
+            <div class="absolute inset-0 bg-black/40 z-10"></div>
+            
+            <div class="relative z-20 h-full flex items-center px-[5%] lg:px-[8%] text-white">
+                <div class="max-w-[700px]">
+                    <h1 class="text-[2.5rem] lg:text-[4rem] font-extrabold mb-4 leading-tight">{{ slide.title }}</h1>
+                    {% if slide.subtitle %}
+                        <p class="text-lg lg:text-xl mb-8 text-gray-200">{{ slide.subtitle }}</p>
+                    {% endif %}
+                    {% if slide.button_text %}
+                        <a href="{{ slide.button_link }}" class="inline-block bg-primary text-dark font-bold py-4 px-10 clip-btn hover:scale-105 transition-transform">
+                            {{ slide.button_text }}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+    {% if self.slides|length > 1 %}
+        <button onclick="changeSlide(-1)" class="absolute left-4 top-1/2 -translate-y-1/2 z-40 text-white/50 hover:text-white transition-colors">
+            <i class="fa-solid fa-chevron-left text-3xl"></i>
+        </button>
+        <button onclick="changeSlide(1)" class="absolute right-4 top-1/2 -translate-y-1/2 z-40 text-white/50 hover:text-white transition-colors">
+            <i class="fa-solid fa-chevron-right text-3xl"></i>
+        </button>
+    {% endif %}
+</section>

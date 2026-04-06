@@ -1,0 +1,25 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<section class="relative pt-[140px] lg:pt-[180px] pb-0 w-full flex flex-col justify-between overflow-hidden"
+         style="background-color: {{ value.bg_color }}; min-height: {{ value.height }}vh;">
+    
+    {# Texto superior centrado #}
+    <div class="text-center px-[5%] relative z-20 mb-8 lg:mb-12">
+        <h1 class="text-[2.2rem] lg:text-[3.2rem] text-white font-medium mb-3 tracking-tight">
+            {{ value.pre_title }} 
+            <span class="text-primary font-semibold">{{ value.highlighted_title }}</span>
+        </h1>
+        <p class="text-[1.1rem] lg:text-[1.3rem] text-gray-300 font-light max-w-3xl mx-auto leading-relaxed">
+            {{ value.subtitle }}
+        </p>
+    </div>
+
+    {# Imagen inferior #}
+    <div class="relative z-10 w-full max-w-[1200px] mx-auto px-[2%] lg:px-0 flex justify-center items-end mt-auto">
+        {% image value.bottom_image original as bottom_img %}
+        <img src="{{ bottom_img.url }}" 
+             alt="{{ value.highlighted_title }}" 
+             class="w-full h-auto object-contain drop-shadow-2xl">
+    </div>
+    
+</section>

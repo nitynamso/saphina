@@ -1,0 +1,15 @@
+{% load wagtailcore_tags %}
+
+<div class="mt-4 mb-2">
+    <a href="{{ self.link }}" 
+       class="inline-block py-3 px-8 rounded font-bold transition-all hover:-translate-y-1 hover:shadow-lg
+       {% if self.style == 'primary' %}
+            bg-primary text-dark hover:bg-dark hover:text-primary
+       {% elif self.style == 'dark' %}
+            bg-dark text-white hover:bg-primary hover:text-dark
+       {% else %}
+            border-2 border-dark text-dark hover:bg-dark hover:text-white
+       {% endif %}">
+        {{ self.text }}
+    </a>
+</div>

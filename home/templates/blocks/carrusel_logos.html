@@ -1,0 +1,32 @@
+{% load wagtailimages_tags %}
+
+<section class="py-16 lg:py-[20rem] bg-gray-50">
+    <div class="max-w-[100rem] mx-auto px-[5%]">
+        {% if value.title %}
+            <h2 class="text-[2rem] lg:text-[2.5rem] font-bold text-dark text-center mb-8">{{ value.title }}</h2>
+        {% endif %}
+        {% if value.subtitle %}
+            <p class="text-[1.1rem] text-[#555] text-center mb-12 max-w-2xl mx-auto">{{ value.subtitle }}</p>
+        {% endif %}
+
+        <div class="flex flex-wrap justify-center items-center gap-8 lg:gap-12">
+            {% for brand in lista_marcas %}
+                <div class="grayscale hover:grayscale-0 transition-all duration-300">
+                    {% if brand.logo_external %}
+                        <img src="{{ brand.logo_external }}" alt="{{ brand.name }}" class="max-h-[30px] lg:max-h-[50px] object-contain grayscale opacity-80 transition-all hover:grayscale-0 hover:opacity-100 hover:scale-105">
+                    {% elif brand.logo %}
+                        {% image brand.logo height-80 class="max-h-[30px] lg:max-h-[50px] object-contain grayscale opacity-80 transition-all hover:grayscale-0 hover:opacity-100 hover:scale-105" %}
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+
+        {% if value.button_text and value.button_link %}
+            <div class="text-center mt-12">
+                <a href="{{ value.button_link }}" class="inline-block px-6 py-3 bg-primary text-dark font-bold rounded hover:bg-primary-dark transition">
+                    {{ value.button_text }}
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</section>

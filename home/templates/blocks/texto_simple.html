@@ -1,0 +1,9 @@
+{% load wagtailcore_tags %}
+<section class="py-10 lg:py-14 bg-white">
+    <div class="max-w-7xl mx-auto px-[5%] {{ value.alignment }}">
+        <div class="text-[1.1rem] lg:{{ value.size_lg }} text-dark font-normal leading-relaxed 
+            [&>p>strong]:font-black [&>p>b]:font-black">
+            {{ value.content|richtext }}
+        </div>
+    </div>
+</section>
