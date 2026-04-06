@@ -453,7 +453,7 @@ class ColumnLayoutBlock(blocks.StructBlock):
 
 class AboutUsBlock(blocks.StructBlock):
    # Header (The one that says AquíLoHay | The ally...)
-    resaltado_amarillo = blocks.CharBlock(default="AquíLoHay", label="Yellow Text")
+    resaltado_amarillo = blocks.CharBlock(default="SaphinaGroup", label="Yellow Text")
     texto_secundario = blocks.CharBlock(default=" | The ally your business needs", label="Side Text")
     
     # Left Column

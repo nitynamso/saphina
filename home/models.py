@@ -34,10 +34,10 @@ from .blocks import (HeadingBlock, ButtonBlock,
 @register_snippet
 class GlobalHeader(PreviewableMixin, models.Model):
     """
-    Control central de la cabecera: Logo y Banner Superior.
-    Afecta a todo el sitio simultáneamente.
+    Central header control: Logo and Top Banner.
+    Affects the entire site simultaneously.
     """
-    title = models.CharField(max_length=255, default="Configuración de Cabecera")
+    title = models.CharField(max_length=255, default="Header Configuration")
     
     # --- LOGO ---
     logo = models.ForeignKey(
@@ -45,21 +45,21 @@ class GlobalHeader(PreviewableMixin, models.Model):
         null=True, blank=True,
         on_delete=models.SET_NULL,
         related_name='+',
-        verbose_name="Logo Principal"
+        verbose_name="Main Logo"
     )
     logo_width = models.IntegerField(
         default=100, 
-        verbose_name="Ancho del Logo (px)",
-        help_text="Ajusta el tamaño del logo en la cabecera"
+        verbose_name="Logo Width (px)",
+        help_text="Adjust the logo size in the header"
     )
 
     # --- TOP BAR (BANNER) ---
-    address = models.CharField(max_length=255, default="13463 N W 19th Lane, Miami, FL 33182", verbose_name="Dirección")
-    phone = models.CharField(max_length=50, default="+1 (786) 847-5568", verbose_name="Teléfono")
+    address = models.CharField(max_length=255, default="13463 N W 19th Lane, Miami, FL 33182", verbose_name="Address")
+    phone = models.CharField(max_length=50, default="+1 (786) 847-5568", verbose_name="Phone")
     
-    # --- ESTILOS ---
-    bg_color = models.CharField(max_length=7, default="#FAD02C", verbose_name="Color Fondo Banner (Hex)")
-    text_color = models.CharField(max_length=7, default="#1a1a1a", verbose_name="Color Texto Banner (Hex)")
+    # --- STYLES ---
+    bg_color = models.CharField(max_length=7, default="#FAD02C", verbose_name="Banner Background Color (Hex)")
+    text_color = models.CharField(max_length=7, default="#1a1a1a", verbose_name="Banner Text Color (Hex)")
 
     panels = [
         FieldPanel('title'),
@@ -70,11 +70,11 @@ class GlobalHeader(PreviewableMixin, models.Model):
         MultiFieldPanel([
             FieldPanel('address'),
             FieldPanel('phone'),
-        ], heading="Información del Banner Superior"),
+        ], heading="Top Banner Information"),
         MultiFieldPanel([
             FieldPanel('bg_color'),
             FieldPanel('text_color'),
-        ], heading="Estilos del Banner"),
+        ], heading="Banner Styles"),
     ]
 
     def __str__(self):
@@ -89,13 +89,13 @@ class GlobalHeader(PreviewableMixin, models.Model):
 
 @register_setting
 class SiteSettings(BaseSiteSetting):
-    """Configuraciones de redes sociales."""
-    facebook = models.URLField(blank=True, help_text="URL de Facebook")
-    instagram = models.URLField(blank=True, help_text="URL de Instagram")
+    """Social media settings."""
+    facebook = models.URLField(blank=True, help_text="Facebook URL")
+    instagram = models.URLField(blank=True, help_text="Instagram URL")
     web3forms_key = models.CharField(
         max_length=100, 
-        verbose_name="Llave de Web3Forms",
-        help_text="Pega aquí la Access Key. Esto activará todos los formularios de contacto de la página web.",
+        verbose_name="Web3Forms Key",
+        help_text="Paste your Access Key here. This will activate all contact forms on the website.",
         default="Sin Llave",
     )
 
@@ -104,40 +104,12 @@ class SiteSettings(BaseSiteSetting):
             FieldPanel('facebook'),
             FieldPanel('instagram'),
             FieldPanel('web3forms_key')
-        ], heading="Configuracion General"),
+        ], heading="General Settings"),
     ]
-    
 
 
-@register_snippet
-class Category(models.Model):
-    name = models.CharField(max_length=100)
-    icon_url = models.URLField(blank=True, verbose_name="URL del Icono (SVG)")
-    icon = models.ForeignKey(
-        'wagtailimages.Image', 
-        on_delete=models.SET_NULL, 
-        null=True, blank=True,
-        related_name='+'
-    )
-    url = models.URLField(blank=True)
-
-    panels = [FieldPanel('name'), FieldPanel('icon_url'), FieldPanel('icon'), FieldPanel('url')]
-    def __str__(self): return self.name
 
 
-@register_snippet
-class Brand(models.Model):
-    name = models.CharField(max_length=100)
-    logo_url = models.URLField(blank=True)
-    logo = models.ForeignKey(
-        'wagtailimages.Image', 
-        on_delete=models.SET_NULL, 
-        null=True, blank=True,
-        related_name='+'
-    )
-
-    panels = [FieldPanel('name'), FieldPanel('logo_url'), FieldPanel('logo')]
-    def __str__(self): return self.name
 
 # ==========================================
 # 2. DEFINICIÓN DE BLOQUES (STRUCTBLOCKS)
@@ -153,19 +125,9 @@ class HeroSlideBlock(blocks.StructBlock):
     class Meta:
         icon = 'image'
         label = 'Slide'
+        
 
-class SliderBlock(blocks.StructBlock):
-    logo = ImageChooserBlock(required=False, label="Logo Flotante Opcional")
-    logo_position = blocks.ChoiceBlock(choices=[
-        ('top-6 left-6', 'Top Izquierda'),
-        ('top-6 right-6', 'Top Derecha'),
-        ('bottom-20 left-6', 'Bottom Izquierda'),
-        ('bottom-20 right-6', 'Bottom Derecha'),
-        ('top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2', 'Centro Total'),
-    ], default='top-6 left-6')
-    logo_width = blocks.ChoiceBlock(choices=[
-        ('w-24', 'Pequeño'), ('w-32', 'Normal'), ('w-48', 'Mediano'), ('w-64', 'Grande'),
-    ], default='w-48')
+class SliderBlock(blocks.StructBlock): 
     autoplay = blocks.BooleanBlock(required=False, default=True)
     interval = blocks.IntegerBlock(required=False, default=5000)
     slides = blocks.ListBlock(HeroSlideBlock())
@@ -173,7 +135,8 @@ class SliderBlock(blocks.StructBlock):
     class Meta:
         template = 'blocks/slider.html'
         icon = 'image'
-        label = 'Slider Principal'
+        label = 'Main Slider'
+        group = "Main Sections"
 
 class StaticHeroBlock(blocks.StructBlock):
     image = ImageChooserBlock(required=True)
@@ -183,13 +146,14 @@ class StaticHeroBlock(blocks.StructBlock):
     class Meta:
         template = 'blocks/hero_estatico.html'
         icon = 'image'
+        group = "Main Sections"
 
 class FeatureItemBlock(blocks.StructBlock):
     texto = blocks.CharBlock()
     icon_svg = blocks.TextBlock(required=False)
 
 class TextWithImageBlock(blocks.StructBlock):
-    image_position = blocks.ChoiceBlock(choices=[('right', 'Derecha'), ('left', 'Izquierda')], default='right')
+    image_position = blocks.ChoiceBlock(choices=[('right', 'Right'), ('left', 'Left')], default='right')
     pre_title_highlight = blocks.CharBlock(required=False)
     pre_title_rest = blocks.CharBlock(required=False)
     main_heading = blocks.TextBlock()
@@ -203,13 +167,13 @@ class TextWithImageBlock(blocks.StructBlock):
         icon = 'doc-empty-inverse'
 
 class CategoryGridBlock(blocks.StructBlock):
-    title = blocks.CharBlock(default="Nuestras categorías")
+    title = blocks.CharBlock(default="Our categories")
     class Meta:
         template = 'blocks/grilla_categorias.html'
         icon = 'list-ul'
 
 class LogoCarouselBlock(blocks.StructBlock):
-    title = blocks.CharBlock(default="Un mismo proveedor")
+    title = blocks.CharBlock(default="One single supplier")
     subtitle = blocks.CharBlock(required=False)
     button_text = blocks.CharBlock(required=False)
     button_link = blocks.URLBlock(required=False)
@@ -222,7 +186,7 @@ class ReasonItemBlock(blocks.StructBlock):
     description = blocks.TextBlock()
 
 class NumberedFeaturesBlock(blocks.StructBlock):
-    title = blocks.CharBlock(default="¿Por qué elegirnos?")
+    title = blocks.CharBlock(default="Why choose us?")
     subtitle = blocks.CharBlock(required=False)
     reasons = blocks.ListBlock(ReasonItemBlock())
     class Meta:
@@ -236,7 +200,7 @@ class CardItemBlock(blocks.StructBlock):
     description = blocks.TextBlock()
 
 class GridCardsBlock(blocks.StructBlock):
-    title = blocks.CharBlock(default="Nuestros Valores")
+    title = blocks.CharBlock(default="Our Values")
     cards = blocks.ListBlock(CardItemBlock())
     class Meta:
         template = 'blocks/grilla_tarjetas.html'
@@ -251,36 +215,34 @@ class CTABannerBlock(blocks.StructBlock):
 
 class FeaturedTextBlock(blocks.StructBlock):
     content = blocks.RichTextBlock(features=['bold', 'italic', 'link'])
-    alignment = blocks.ChoiceBlock(choices=[('text-left', 'Izquierda'), ('text-center', 'Centro'), ('text-right', 'Derecha')], default='text-center')
+    alignment = blocks.ChoiceBlock(choices=[('text-left', 'Left'), ('text-center', 'Center'), ('text-right', 'Right')], default='text-center')
     style = blocks.ChoiceBlock(choices=[
-        ('none', 'Limpio'),
-        ('bg-grayAlt p-8 rounded-xl', 'Caja Gris'),
-        ('bg-primary text-dark p-8 rounded-xl', 'Caja Amarilla'),
+        ('none', 'Clean'),
+        ('bg-grayAlt p-8 rounded-xl', 'Gray Box'),
+        ('bg-primary text-dark p-8 rounded-xl', 'Yellow Box'),
     ], default='none')
     class Meta:
         template = 'blocks/texto_destacado.html'
         icon = 'openquote'
-
 class SimpleTextBlock(blocks.StructBlock):
     content = blocks.RichTextBlock(features=['bold', 'italic', 'link'])
-    alignment = blocks.ChoiceBlock(choices=[('text-left', 'Izquierda'), ('text-center', 'Centro'), ('text-right', 'Derecha')], default='text-center')
+    alignment = blocks.ChoiceBlock(choices=[('text-left', 'Left'), ('text-center', 'Center'), ('text-right', 'Right')], default='text-center')
     size_lg = blocks.ChoiceBlock(
         choices=[
-            ('text-lg', 'Pequeño (lg)'),           # 1.125rem / 18px
-            ('text-xl', 'Mediano (xl)'),           # 1.25rem / 20px
-            ('text-2xl', 'Grande (2xl)'),          # 1.5rem / 24px
-            ('text-3xl', 'Extra Grande (3xl)'),    # 1.875rem / 30px
+            ('text-lg', 'Small (lg)'),           # 1.125rem / 18px
+            ('text-xl', 'Medium (xl)'),           # 1.25rem / 20px
+            ('text-2xl', 'Large (2xl)'),          # 1.5rem / 24px
+            ('text-3xl', 'Extra Large (3xl)'),    # 1.875rem / 30px
             ('text-4xl', '2XL (4xl)'),             # 2.25rem / 36px
             ('text-5xl', '3XL (5xl)'),             # 3rem / 48px
             ('text-6xl', '4XL (6xl)'),             # 3.75rem / 60px
         ],
         default='text-2xl',
-        label="Tamaño en pantallas grandes (LG)"
+        label="Size on large screens (LG)"
     )
     class Meta:
         template = 'blocks/texto_simple.html'
         icon = 'title'
-
 # ==========================================
 # 3. LISTA DE BLOQUES Y PÁGINAS
 # ==========================================
@@ -324,11 +286,7 @@ class HomePage(Page):
 
     content_panels = Page.content_panels + [FieldPanel('body')]
 
-    def get_context(self, request):
-        context = super().get_context(request)
-        context['lista_categorias'] = Category.objects.all()
-        context['lista_marcas'] = Brand.objects.all()
-        return context
+    
 
 class StandardPage(Page):
     body = StreamField(BLOQUES_COMUNES, use_json_field=True, blank=True, null=True)
