@@ -683,3 +683,31 @@ class SplitHeroBlock(blocks.StructBlock):
         icon = 'image'
         label = "Hero con imagen inferior"
         group = "Secciones Principales"
+
+
+class VideoLandingBlock(blocks.StructBlock):
+    # --- HERO VIDEO ---
+    logo = ImageChooserBlock(required=False, label="Logo")
+    titulo_principal = blocks.RichTextBlock(features=['bold', 'italic'], label="Main Title")
+    banner_video_text = blocks.CharBlock(default="Click the 'PLAY' button and discover how to work with us!", label="Video Banner Text")
+    
+    # --- LEAD MAGNET MAGIC ---
+    video_thumbnail = ImageChooserBlock(label="Video Thumbnail (Before form)")
+    actual_video_embed = blocks.URLBlock(label="Actual Video URL", help_text="e.g., YouTube Embed URL. Shown after filling the form.")
+    form_webhook = blocks.URLBlock(required=False, label="Webhook URL (For leads)", help_text="e.g., Zapier, Make, or CRM URL")
+    tiempo_aparicion = blocks.IntegerBlock(default=15, label="Seconds to show modal automatically")
+    
+    boton_video_text = blocks.CharBlock(default="Watch the Video!", label="Video Button Text")
+
+    # --- BIO ---
+    banner_bio_text = blocks.CharBlock(default="Click here and discover how to work with us NOW!", label="Bio Banner Text")
+    bio_image = ImageChooserBlock(label="Profile Picture")
+    bio_nombre = blocks.CharBlock(default="RICARDO DOMINGUEZ", label="Name")
+    bio_cargo = blocks.CharBlock(default="Founder of AquiLoHay", label="Role/Subtitle")
+    bio_descripcion = blocks.RichTextBlock(label="Bio Description")
+    boton_final_text = blocks.CharBlock(default="Watch the Video!", label="Final Button Text")
+
+    class Meta:
+        template = 'home/blocks/video_landing.html'
+        icon = 'media'
+        label = 'Landing: Gated Video'

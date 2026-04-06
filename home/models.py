@@ -24,7 +24,8 @@ from .blocks import (HeadingBlock, ButtonBlock,
                      WhyChooseUsBlock,
                      CategoriesSectionBlock,
                      ContactSectionOscuroBlock,
-                     ContactSectionClaroBlock)
+                     ContactSectionClaroBlock,
+                     VideoLandingBlock)
 
 # ==========================================
 # 1. IDENTIDAD GLOBAL Y CONFIGURACIÓN
@@ -310,6 +311,7 @@ BLOQUES_COMUNES = [
     ('categories_section', CategoriesSectionBlock()),
     ('contact_section_dark', ContactSectionOscuroBlock()),
     ('contact_section_white', ContactSectionClaroBlock()),
+    ('video_landing', VideoLandingBlock())
     
     
 

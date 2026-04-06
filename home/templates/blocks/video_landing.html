@@ -1,0 +1,97 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<div class="video-landing-wrapper font-sans relative" 
+     data-video-url="{{ self.actual_video_embed }}" 
+     data-timer="{{ self.tiempo_aparicion }}">
+     
+    <section class="bg-black flex flex-col items-center pt-12 pb-8 px-4 lg:px-8">
+        <div class="mb-10 lg:mb-16">
+            {% if self.logo %}
+                {% image self.logo original as logo_img %}
+                <img src="{{ logo_img.url }}" class="h-[70px] lg:h-[90px] object-contain">
+            {% endif %}
+        </div>
+
+        <h1 class="text-white text-center text-[2rem] md:text-[2.5rem] lg:text-[2.5rem] font-bold leading-[1.15] mb-12 max-w-5xl tracking-tight" style="font-family: 'Montserrat', sans-serif;">
+            {{ self.titulo_principal|richtext }}
+        </h1>
+
+        <div class="w-full max-w-4xl flex flex-col items-center shadow-2xl">
+            <div class="bg-primary text-black font-bold text-[1rem] md:text-[1.2rem] py-3 px-4 w-full text-center">
+                {{ self.banner_video_text }}
+            </div>
+
+            <div id="videoContainer" class="trigger-modal relative w-full aspect-video border-2 border-white cursor-pointer group overflow-hidden bg-gray-900 w-full block">
+                {% image self.video_thumbnail original as thumb %}
+                <img src="{{ thumb.url }}" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-700">
+                <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-300"></div>
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 md:w-28 md:h-28 bg-[#E52020] rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(229,32,32,0.4)] group-hover:scale-110 transition-transform duration-300 ease-out">
+                    <svg class="w-10 h-10 md:w-14 md:h-14 text-white ml-2" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+                </div>
+            </div>
+        </div>
+
+        <button class="trigger-modal mt-10 bg-primary text-black font-bold text-[1.2rem] px-10 py-4 rounded-xl shadow-[0_0_20px_rgba(255,215,0,0.6)] text-center hover:scale-105 transition-transform">
+            {{ self.boton_video_text }}
+        </button>
+    </section>
+
+    <section class="bg-black py-12 px-4 flex flex-col items-center">
+        <div class="hidden md:block bg-primary text-black font-bold text-[1rem] md:text-[1.2rem] px-8 py-3 rounded-xl mb-[-20px] relative z-20 text-center shadow-[0_0_15px_rgba(255,215,0,0.5)]">
+            {{ self.banner_bio_text }}
+        </div>
+
+        <div class="bg-white rounded-[30px] w-full max-w-[65rem] pt-12 pb-8 px-6 md:p-12 flex flex-col lg:flex-row items-center justify-center gap-8 relative z-10">
+            <div class="w-full lg:w-[45%] flex justify-center">
+                {% image self.bio_image original as bio_img %}
+                <img src="{{ bio_img.url }}" class="w-[200px] sm:w-[250px] lg:w-full lg:max-w-[350px] rounded-2xl object-cover shadow-md">
+            </div>
+
+            <div class="w-full lg:w-[55%] border-[3px] border-primary rounded-3xl p-6 md:p-8 text-center flex flex-col gap-4">
+                <div>
+                    <h1 class="text-[1.8rem] md:text-[2.2rem] font-bold text-black leading-none m-0" style="font-family: 'Montserrat', sans-serif;">{{ self.bio_nombre }}</h1>
+                    <h2 class="text-[1rem] md:text-[1.1rem] text-gray-700 font-normal mt-2 m-0">{{ self.bio_cargo }}</h2>
+                </div>
+                
+                <div class="text-black text-[0.95rem] md:text-[1rem] leading-relaxed flex flex-col gap-4 text-left">
+                    {{ self.bio_descripcion|richtext }}
+                </div>
+            </div>
+        </div>
+
+        <button class="trigger-modal mt-12 bg-primary text-black font-bold text-[1.2rem] md:text-[1.4rem] px-12 py-4 rounded-xl hover:scale-105 transition-transform duration-300 shadow-[0_0_20px_rgba(255,215,0,0.5)]">
+            {{ self.boton_final_text }}
+        </button>
+    </section>
+
+    <div id="leadModal" class="fixed inset-0 z-[2000] hidden items-center justify-center bg-black/80 backdrop-blur-sm px-4 opacity-0 transition-opacity duration-300">
+        <div class="bg-white rounded-2xl w-full max-w-md p-8 shadow-2xl transform scale-95 transition-transform duration-300" id="modalContent">
+            
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-dark font-sans">Access the Video</h3>
+                <button id="closeModal" class="text-gray-400 hover:text-red-500 text-2xl">&times;</button>
+            </div>
+            
+            <p class="text-gray-600 mb-6 font-sans">Leave your details to discover how to work with us immediately.</p>
+
+            <form id="gatedVideoForm" action="{{ self.form_webhook|default:'#' }}" method="POST" class="flex flex-col gap-4 font-sans">
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Full Name *</label>
+                    <input type="text" name="name" required class="w-full p-3 border border-gray-300 rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Country *</label>
+                    <input type="text" name="country" required class="w-full p-3 border border-gray-300 rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 mb-1">Phone (WhatsApp) *</label>
+                    <input type="tel" name="phone" required class="w-full p-3 border border-gray-300 rounded focus:border-primary focus:ring-1 focus:ring-primary outline-none">
+                </div>
+                
+                <button type="submit" class="mt-4 w-full bg-dark text-primary font-bold py-4 rounded-xl hover:bg-primary hover:text-dark transition-colors shadow-lg">
+                    Watch Video Now
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
