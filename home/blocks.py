@@ -18,18 +18,18 @@ class ContactSectionClaroBlock(blocks.StructBlock):
     )
     description = blocks.RichTextBlock(
         required=False, 
-        label="Descripción",
+        label="Description",
         features=['bold', 'italic', 'link']
     )
     imagen = ImageChooserBlock(
         required=False, 
-        label="Imagen lateral",
-        help_text="Sube la imagen que acompañará al formulario."
+        label="Side Image",
+        help_text="Upload the image that will accompany the form."
     )
     image_url = blocks.URLBlock(
         required=False,
         label=" image from URL",
-        help_text="Pega un enlace directo a una imagen (ej: https://example.com/imagen.jpg)."
+        help_text="Paste a direct link to an image (e.g., https://example.com/image.jpg)."
     )
 
 
@@ -44,12 +44,12 @@ class ContactSectionClaroBlock(blocks.StructBlock):
 
         # Regla 1: No pueden estar ambos vacíos
         if not imagen and not image_url:
-            errors['imagen'] = ValidationError("Debes seleccionar una imagen o proporcionar una URL.")
-            errors['image_url'] = ValidationError("Debes proporcionar una URL si no seleccionas una imagen.")
+            errors['imagen'] = ValidationError("You must select an image or provide a URL.")
+            errors['image_url'] = ValidationError("You must provide a URL if you do not select an image.")
 
         # Regla 2: No pueden usar ambos al mismo tiempo
         if imagen and image_url:
-            errors['image_url'] = ValidationError("Por favor, usa solo un método. Borra esta URL si usas la imagen superior.")
+            errors['image_url'] = ValidationError("Please, use only one method. Delete this URL if you use the top image.")
 
         # Si el diccionario tiene algo, lanzamos la excepción estructurada de Wagtail
         if errors:
@@ -59,8 +59,8 @@ class ContactSectionClaroBlock(blocks.StructBlock):
     class Meta:
         template = 'blocks/contact_claro.html'
         icon = 'image'
-        label = 'Sección Contacto (Claro con Imagen)'
-        group = "Secciones Principales"
+        label = 'Contact Section (Clear with Image)'
+        group = "Main Sections"
 
 ##SECCION DE CONTACTO OSCURO PARA LA PAGINA CONTACTO 
 
@@ -77,14 +77,14 @@ class ContactSectionOscuroBlock(blocks.StructBlock):
     )
     info_contacto = SnippetChooserBlock(
         'home.GlobalHeader', 
-        label="Información de Contacto Global",
-        help_text="Selecciona el GlobalHeader que contiene la dirección y teléfono de la empresa."
+        label="Global Contact Information",
+        help_text="Select the GlobalHeader that contains the company's address and phone number."
     )
     class Meta:
         template = 'blocks/contact_oscuro.html'
         icon = 'mail'
         label = 'section contact (dark)'
-        group = "Secciones Principales"
+        group = "Main Sections"
 
 ###########################################################################
 
@@ -153,7 +153,7 @@ class CategoriesSectionBlock(blocks.StructBlock):
         template = "blocks/categories_section_block.html"
         icon = "folder-open-inverse"
         label = "Categories Section"
-        group = "Secciones Principales"
+        group = "Main Sections"
         
 
 
@@ -161,30 +161,30 @@ class CategoriesSectionBlock(blocks.StructBlock):
 
 ##Acordion Con Imagen##
 class AccordionItemBlock(blocks.StructBlock):
-    title = blocks.CharBlock(required=True, label="Título del Acordeón")
-    description = blocks.TextBlock(required=True, label="Descripción")
+    title = blocks.CharBlock(required=True, label="Accordion Title")
+    description = blocks.TextBlock(required=True, label="Description")
 
     class Meta:
         icon = "list-ul"
-        label = "Elemento de Acordeón"
+        label = "Accordion Element"
 
 class WhyChooseUsBlock(blocks.StructBlock):
     subtitle = blocks.CharBlock(
         required=False, 
-        label="Subtítulo", 
-        default="¿POR QUÉ ELEGIRNOS?"
+        label="Subtitle", 
+        default="WHY CHOOSE US?"
     )
     title_part_1 = blocks.CharBlock(
         required=True, 
-        label="Título (Parte Principal)", 
-        default="¿Por Qué Elegir"
+        label="Title (Main Part)", 
+        default="Why Choose"
     )
     title_part_2 = blocks.CharBlock(
         required=True, 
-        label="Título (Parte Destacada/Color)", 
-        default="AquíLoHay.Com?"
+        label="Title (Highlighted Part/Color)", 
+        default="SaphinaGroup.Com?"
     )
-    image = ImageChooserBlock(required=True, label="Imagen Principal")
+    image = ImageChooserBlock(required=True, label="Main Image")
     
     # Lista dinámica para agregar tantos acordeones como se necesite
     accordion_items = blocks.ListBlock(
@@ -196,7 +196,7 @@ class WhyChooseUsBlock(blocks.StructBlock):
         template = "blocks/why_choose_us_block.html" # Ajusta la ruta a tu proyecto
         icon = "help"
         label = "Why_choose_us_with_image"
-        group = "Secciones Principales"
+        group = "Main Sections"
 
 
 
@@ -205,216 +205,216 @@ class CommunityBannerBlock(blocks.StructBlock):
     # Título principal (con soporte para salto de línea)
     title = blocks.CharBlock(
         required=True,
-        default="Únete a nuestra<br>comunidad",
-        help_text="Título principal. Usa <br> para saltos de línea."
+        default="Join our<br>community",
+        help_text="Main title. Use <br> for line breaks."
     )
     # Subtítulo
     subtitle = blocks.CharBlock(
         required=True,
-        default="¡Llegó el momento de hacer<br>crecer tu negocio!",
-        help_text="Subtítulo. Usa <br> para saltos de línea."
+        default="The time has come to grow<br>your business!",
+        help_text="Subtitle. Use <br> for line breaks."
     )
     # Párrafo descriptivo
     paragraph = blocks.TextBlock(
         required=True,
-        default="En SaphinaGroup no solo encontrarás productos excepcionales, sino un equipo comprometido con tu éxito. Forma parte de nuestra comunidad de emprendedores exitosos en América Latina y el Caribe.",
-        help_text="Texto descriptivo. Los saltos de línea se conservan automáticamente."
+        default="At SaphinaGroup you will not only find exceptional products, but also a team committed to your success. Be part of our community of successful entrepreneurs in Latin America and the Caribbean.",
+        help_text="Descriptive text. Line breaks are preserved automatically."
     )
     # Imagen (lado derecho)
     image = ImageChooserBlock(
         required=False,
-        help_text="Sube una imagen para el lado derecho"
+        help_text="Upload an image to the right side"
     )
     image_url = blocks.URLBlock(
         required=False,
-        help_text="O usa una URL externa para la imagen"
+        help_text="Or use an external URL for the image"
     )
     # Opcional: ancho máximo del contenedor de texto (para mantener legibilidad)
     text_max_width = blocks.CharBlock(
         required=False,
         default="500px",
-        help_text="Ancho máximo del bloque de texto (ej: 500px, 600px, 100%)"
+        help_text="Maximum width of the text block (e.g., 500px, 600px, 100%)"
     )
 
     def clean(self, value):
         if not value.get('image') and not value.get('image_url'):
-            raise ValidationError("Debes proporcionar una imagen (subiendo un archivo o ingresando una URL)")
+            raise ValidationError("You must provide an image (by uploading a file or entering a URL)")
         return super().clean(value)
 
     class Meta:
         template = "blocks/community_banner_block.html"
         icon = "image"
         label = "Banner Comunidad"
-        group = "Secciones Principales"
+        group = "Main Sections"
 
 
 class WhyChooseShapinaBlock(blocks.StructBlock):
     # Imagen de la tarjeta (lado izquierdo)
     card_image = ImageChooserBlock(
         required=False,
-        help_text="Sube una imagen para la tarjeta (recomendado formato horizontal)"
+        help_text="Upload an image for the card (horizontal format recommended)"
     )
     card_image_url = blocks.URLBlock(
         required=False,
-        help_text="O usa una URL externa para la imagen"
+        help_text="Or use an external URL for the image"
     )
     card_title = blocks.CharBlock(
         required=True,
-        default="¿Por qué elegir a SaphinaGroup?",
-        help_text="Título que aparece sobre la imagen (puedes usar <br> para salto de línea)"
+        default="Why choose SaphinaGroup?",
+        help_text="Title that appears above the image (you can use <br> for line break)"
     )
     
-    titulo_right = blocks.CharBlock(default="Cuando te unes a nuestra Familia", 
-                                        label="Texto al lado",
-                                        help_text="Titulo del lado derecho")
-    resaltado_amarillo = blocks.CharBlock(default="obtienes",
-                                           label="Texto Amarillo",
-                                           help_text="Resaltado en amarillo")
+    titulo_right = blocks.CharBlock(default="When you join our Family", 
+                                        label="Side Text",
+                                        help_text="Title of the right side")
+    resaltado_amarillo = blocks.CharBlock(default="you get",
+                                           label="Yellow Text",
+                                           help_text="Highlighted in yellow")
     
     # Lista de beneficios
     benefits = blocks.ListBlock(
-        blocks.CharBlock(label="Beneficio"),
-        help_text="Lista de beneficios (cada uno con un check amarillo)"
-    )
+    blocks.CharBlock(label="Benefit"),
+    help_text="List of benefits (each with a yellow checkmark)"
+)
 
     def clean(self, value):
         # Validar que al menos una opción de imagen esté presente
         if not value.get('card_image') and not value.get('card_image_url'):
-            raise ValidationError("Debes proporcionar una imagen para la tarjeta (subiendo un archivo o ingresando una URL)")
+            raise ValidationError("You must provide an image for the card (either upload a file or enter a URL")
         return super().clean(value)
 
     class Meta:
         template = "blocks/why_choose_saphina_block.html"
         icon = "image"
-        label = "¿Por qué elegir SaphineGroup?"  
-        group = "Secciones Principales"
+        label = "Why choose SaphineGroup?"
+        group = "Main Sections"
 
 #BLOQUE DE MISION 
+
 class MissionBlock(blocks.StructBlock):
     title = blocks.CharBlock(
         required=True,
-        default="Nuestra Misión",
-        help_text="Título principal de la sección"
+        default="Our Mission",
+        help_text="Main title of the section"
     )
     description = blocks.TextBlock(
         required=True,
-        help_text="Descripción / texto de la misión"
+        help_text="Description / mission text"
     )
     image = ImageChooserBlock(
         required=True,
-        help_text="Imagen que acompaña al texto"
+        help_text="Image that accompanies the text"
     )
     image_url = blocks.URLBlock(
         required=False,
-        help_text="O usa una URL externa para la imagen"
+        help_text="Or use an external URL for the image"
     )
     image_position = blocks.ChoiceBlock(
         choices=[
-            ('right', 'Imagen a la derecha'),
-            ('left', 'Imagen a la izquierda'),
+            ('right', 'Image on the right'),
+            ('left', 'Image on the left'),
         ],
         default='right',
-        help_text="Posición de la imagen respecto al texto"
+        help_text="Position of the image relative to the text"
     )
     def clean(self, value):
         if value.get('image') and value.get('image_url'):
-            raise ValidationError("Debes elegir solo una opción: subir una imagen o ingresar una URL, no ambas.")
+            raise ValidationError("You must choose only one option: upload an image or enter a URL, not both.")
         if not value.get('image') and not value.get('image_url'):
-            raise ValidationError("Debes proporcionar una imagen (subiendo un archivo o ingresando una URL)")
+            raise ValidationError("You must provide an image (either upload a file or enter a URL)")
         return super().clean(value)
 
     class Meta:
         template = "blocks/mission_block.html"
         icon = "image"
-        label = "Sección Misión / Visión"
-        group = "Secciones Principales"
-
-
+        label = "Mission / Vision Section"
+        group = "Main Sections"
 
 class ValueItemBlock(blocks.StructBlock):
     """Bloque para cada valor (tarjeta)"""
     icon = ImageChooserBlock(
         required=False,
-        help_text="Sube un ícono (recomendado SVG o PNG)"
+        help_text="Upload an icon (SVG or PNG recommended)"
     )
     icon_url = blocks.URLBlock(
         required=False,
-        help_text="O usa una URL externa para el ícono"
+        help_text="Or use an external URL for the icon"
     )
     title = blocks.CharBlock(
         required=True,
-        help_text="Título del valor (ej: 'Calidad')"
+        help_text="Value title (e.g., 'Quality')"
     )
     description = blocks.TextBlock(
         required=True,
-        help_text="Descripción del valor"
+        help_text="Value description"
     )
 
     def clean(self, value):
         # Validar que al menos uno de los dos campos de ícono esté completo
         if not value.get('icon') and not value.get('icon_url'):
-            raise ValidationError("Debes proporcionar un ícono (subiendo una imagen o ingresando una URL)")
+            raise ValidationError("You must provide an icon (either upload an image or enter a URL)")
         return super().clean(value)
 
     class Meta:
         icon = "image"
-        label = "Valor"
-        group = "Componentes Visuales"  # opcional: agrupar
+        label = "Value"
+        group = "Visual Components"
+
+
 
 
 class ValuesBlock(blocks.StructBlock):
     """Bloque principal de la sección de valores"""
     title = blocks.CharBlock(
         required=True,
-        default="Nuestros Valores",
-        help_text="Título principal (ej: 'Nuestros Valores')"
+        default="Our Values",
+        help_text="Main title (e.g., 'Our Values')"
     )
     subtitle_text = blocks.TextBlock(
         required=True,
-        default="En AquíLohay, nos guiamos por una serie de valores que nos permiten brindar la mejor experiencia de compra para nuestros clientes. Estos valores incluyen:",
-        help_text="Texto descriptivo que acompaña al título"
+        default="At SaphinaGroup, we are guided by a series of values that allow us to provide the best shopping experience for our customers. These values include:",
+        help_text="Descriptive text that accompanies the title"
     )
     values = blocks.ListBlock(
         ValueItemBlock(),
-        help_text="Lista de valores (cada uno con ícono, título y descripción)"
+        help_text="List of values (each with icon, title and description)"
     )
 
     class Meta:
         template = "blocks/values_block.html"
         icon = "list-ul"
-        label = "Sección Valores"
-        group = "Secciones Principales"  
-
+        label = "Values Section"
+        group = "Main Sections"
 
 class HeadingBlock(blocks.StructBlock):
-    text = blocks.CharBlock(label="Texto")
+    text = blocks.CharBlock(label="Text")
     level = blocks.ChoiceBlock(choices=[
-        ('h2', 'Grande (H2)'),
-        ('h3', 'Mediano (H3)'),
-        ('h4', 'Pequeño (H4)'),
+        ('h2', 'Large (H2)'),
+        ('h3', 'Medium (H3)'),
+        ('h4', 'Small (H4)'),
     ], default='h2')
     
     # CONTROL DE ESPACIADO (Padding/Margin)
     margin_top = blocks.ChoiceBlock(choices=[
-        ('mt-0', 'Sin espacio'),
-        ('mt-4', 'Pequeño'),
-        ('mt-8', 'Mediano'),
-        ('mt-12', 'Grande'),
-        ('mt-20', 'Extra Grande'),
-    ], default='mt-0', label="Espacio Superior")
+        ('mt-0', 'No space'),
+        ('mt-4', 'Small'),
+        ('mt-8', 'Medium'),
+        ('mt-12', 'Large'),
+        ('mt-20', 'Extra Large'),
+    ], default='mt-0', label="Margin Top")
 
     class Meta:
         template = 'blocks/atoms/heading.html'
         icon = 'title'
-        label = 'Título Atómico'
+        label = 'Atomic Heading'
 
 class ButtonBlock(blocks.StructBlock):
     text = blocks.CharBlock()
     link = blocks.URLBlock()
     style = blocks.ChoiceBlock(choices=[
-        ('primary', 'Amarillo'),
-        ('dark', 'Negro'),
-        ('outline', 'Borde'),
+        ('primary', 'Yellow'),
+        ('dark', 'Black'),
+        ('outline', 'Outline'),
     ], default='primary')
 
     class Meta:
@@ -422,7 +422,7 @@ class ButtonBlock(blocks.StructBlock):
         icon = 'link'
 
 class BaseContentBlock(blocks.StreamBlock):
-    """Aquí metes todos los átomos que quieras combinar"""
+    """Here you put all the atoms you want to combine"""
     heading = HeadingBlock()
     paragraph = blocks.RichTextBlock(features=['bold', 'italic', 'link'])
     image = ImageChooserBlock()
@@ -431,184 +431,184 @@ class BaseContentBlock(blocks.StreamBlock):
 
 class ColumnLayoutBlock(blocks.StructBlock):
     layout = blocks.ChoiceBlock(choices=[
-        ('50_50', '2 Columnas Iguales'),
-        ('33_66', 'Izquierda Pequeña'),
-        ('66_33', 'Derecha Pequeña'),
-    ], default='50_50', label="Distribución")
+        ('50_50', '2 Equal Columns'),
+        ('33_66', 'Small Left'),
+        ('66_33', 'Small Right'),
+    ], default='50_50', label="Layout")
 
-    # CONTROL DE ALINEACIÓN VERTICAL (Para llevar al top o centro)
+    # VERTICAL ALIGNMENT CONTROL (To align to top or center)
     vertical_align = blocks.ChoiceBlock(choices=[
-        ('items-start', 'Arriba (Top)'),
-        ('items-center', 'Centrado (Middle)'),
-        ('items-end', 'Abajo (Bottom)'),
-    ], default='items-start', label="Alineación Vertical")
+        ('items-start', 'Top'),
+        ('items-center', 'Middle'),
+        ('items-end', 'Bottom'),
+    ], default='items-start', label="Vertical Alignment")
     
-    left_column = BaseContentBlock(label="Contenido Izquierda")
-    right_column = BaseContentBlock(label="Contenido Derecha")
+    left_column = BaseContentBlock(label="Left Content")
+    right_column = BaseContentBlock(label="Right Content")
 
     class Meta:
         template = 'blocks/layout_columns.html'
         icon = 'columns'
-        label = 'Layout: Dos Columnas'
+        label = 'Layout: Two Columns'
 
 class AboutUsBlock(blocks.StructBlock):
-   # Encabezado (El que dice AquíLoHay | El aliado...)
-    resaltado_amarillo = blocks.CharBlock(default="AquíLoHay", label="Texto Amarillo")
-    texto_secundario = blocks.CharBlock(default=" | El aliado que tu negocio necesita", label="Texto al lado")
+   # Header (The one that says AquíLoHay | The ally...)
+    resaltado_amarillo = blocks.CharBlock(default="AquíLoHay", label="Yellow Text")
+    texto_secundario = blocks.CharBlock(default=" | The ally your business needs", label="Side Text")
     
-    # Columna Izquierda
-    titulo_grande = blocks.RichTextBlock(features=['bold', 'italic'], label="Título (Usa <br> para saltos)")
-    parrafos = blocks.RichTextBlock(label="Cuerpo de texto")
-    beneficios = blocks.ListBlock(blocks.CharBlock(), label="Items con Check", required=False)
+    # Left Column
+    titulo_grande = blocks.RichTextBlock(features=['bold', 'italic'], label="Title (Use <br> for line breaks)")
+    parrafos = blocks.RichTextBlock(label="Body text")
+    beneficios = blocks.ListBlock(blocks.CharBlock(), label="Check Items", required=False)
     
-    # Columna Derecha
-    imagen = ImageChooserBlock(label="Imagen Lateral")
+    # Right Column
+    imagen = ImageChooserBlock(label="Side Image")
     
-    # Pie de Sección
-    texto_pie = blocks.RichTextBlock(required=False, label="Texto antes del botón")
-    boton_texto = blocks.CharBlock(required=False, label="Texto del botón")
-    boton_url = blocks.URLBlock(required=False, label="Link del botón")
+    # Section Footer
+    texto_pie = blocks.RichTextBlock(required=False, label="Text before button")
+    boton_texto = blocks.CharBlock(required=False, label="Button text")
+    boton_url = blocks.URLBlock(required=False, label="Button link")
 
     class Meta:
         template = 'blocks/about_us_block.html'
         icon = 'group'
-        label = 'Sección: Sobre Nosotros (Rígido)'
-        group = "Secciones Principales"
+        label = 'Section: About Us (Rigid)'
+        group = "Main Sections"
 
 class MoreThanSupplierBlock(blocks.StructBlock):
     title = blocks.CharBlock(
         required=True,
-        help_text="Título principal (ej: 'Somos más que un proveedor')",
-        default="Somos más que un proveedor"
+        help_text="Main title (e.g., 'We are more than a supplier')",
+        default="We are more than a supplier"
     )
     intro_text = blocks.RichTextBlock(
         required=True,
-        help_text="Párrafo introductorio que aparece antes de la lista de beneficios"
+        help_text="Introductory paragraph that appears before the list of benefits"
     )
     benefits = blocks.ListBlock(
-        blocks.CharBlock(label="Beneficio"),
-        help_text="Lista de puntos destacados (con check)",
-        label="Lista de beneficios"
+        blocks.CharBlock(label="Benefit"),
+        help_text="List of highlighted points (with checkmark)",
+        label="Benefits list"
     )
     image = ImageChooserBlock(
         required=True,
-        help_text="Imagen que aparece a la izquierda"
+        help_text="Image that appears on the left"
     )
 
     class Meta:
         template = "blocks/more_than_supplier_block.html"
         icon = "image"
-        label = "Más que un proveedor"
-        group = "Secciones Principales"
+        label = "More than a supplier"
+        group = "Main Sections"
 
 
 
 class CategoryItemBlock(blocks.StructBlock):
     name = blocks.CharBlock(
         required=True,
-        help_text="Nombre de la categoría (puedes usar saltos de línea con \n)"
+        help_text="Category name (you can use line breaks with \n)"
     )
     icon_image = ImageChooserBlock(
         required=False,
-        help_text="Sube una imagen (recomendado SVG) para el ícono"
+        help_text="Upload an image (SVG recommended) for the icon"
     )
     icon_url = blocks.URLBlock(
         required=False,
-        help_text="O usa una URL externa para el ícono (ej: https://ejemplo.com/icono.svg)"
+        help_text="Or use an external URL for the icon (e.g., https://example.com/icon.svg)"
     )
    
 
     def clean(self, value):
         # Validar que al menos uno de los dos campos de ícono esté completo
         if not value.get('icon_image') and not value.get('icon_url'):
-            raise ValidationError("Debes proporcionar un ícono (subiendo una imagen o ingresando una URL)")
+            raise ValidationError("You must provide an icon (either upload an image or enter a URL)")
         return super().clean(value)
 
     class Meta:
         icon = "image"
-        label = "Categoría"
+        label = "Category"
 
 class CategoriesBlock(blocks.StructBlock):
     title = blocks.CharBlock(
         required=True,
-        default="Nuestras categorías",
-        help_text="Título de la sección"
+        default="Our categories",
+        help_text="Section title"
     )
     categories = blocks.ListBlock(
         CategoryItemBlock(),
-        help_text="Lista de categorías (puedes añadir, eliminar y ordenar)"
+        help_text="List of categories (you can add, remove and reorder)"
     )
 
     class Meta:
         template = "blocks/categories_block.html"
         icon = "list-ul"
-        label = "Categorías"
-        group = "Secciones Principales"
+        label = "Categories"
+        group = "Main Sections"
 
 class BrandLogoBlock(blocks.StructBlock):
     logo_image = ImageChooserBlock(
         required=False,
-        help_text="Sube el logo de la marca (recomendado SVG o PNG)"
+        help_text="Upload the brand logo (SVG or PNG recommended)"
     )
     logo_url = blocks.URLBlock(
         required=False,
-        help_text="O usa una URL externa para el logo"
+        help_text="Or use an external URL for the logo"
     )
     alt_text = blocks.CharBlock(
         required=False,
-        help_text="Texto alternativo para la imagen"
+        help_text="Alternative text for the image"
     )
 
     def clean(self, value):
         # Validar que al menos uno de los dos campos de logo esté completo
         if not value.get('logo_image') and not value.get('logo_url'):
-            raise ValidationError("Debes proporcionar un logo (subiendo una imagen o ingresando una URL)")
+            raise ValidationError("You must provide a logo (either upload an image or enter a URL)")
         return super().clean(value)
 
     class Meta:
         icon = "image"
-        label = "Logo de marca"
+        label = "Brand logo"
 
 
 
 class BrandsCarouselBlock(blocks.StructBlock):
     title = blocks.CharBlock(
         required=True,
-        default="Un mismo proveedor,",
-        help_text="Título principal (ej: 'Un mismo proveedor,')"
+        default="One single supplier,",
+        help_text="Main title (e.g., 'One single supplier,')"
     )
     subtitle = blocks.CharBlock(
         required=True,
-        default="acceso a 50 marcas al mejor precio",
-        help_text="Subtítulo (ej: 'acceso a 50 marcas al mejor precio')"
+        default="access to 50 brands at the best price",
+        help_text="Subtitle (e.g., 'access to 50 brands at the best price')"
     )
     brands = blocks.ListBlock(
         BrandLogoBlock(),
-        help_text="Lista de logos de marcas que aparecerán en el carrusel"
+        help_text="List of brand logos that will appear in the carousel"
     )
     button_text = blocks.CharBlock(
         required=True,
-        default="Descubre nuestro catálogo"
+        default="Discover our catalog"
     )
     button_url = blocks.URLBlock(
         required=True,
-        help_text="URL del botón"
+        help_text="Button URL"
     )
 
     class Meta:
         template = "blocks/brands_carousel_block.html"
         icon = "list-ul"
-        label = "Carrusel de marcas"
-        group = "Secciones Principales"
+        label = "Brands carousel"
+        group = "Main Sections"
 #########################################################################
 
-#ACORDION DE PREGUNTAS FRECUENTES
+#FAQ ACCORDION
 
 ########################################################################
 class FAQItemBlock(blocks.StructBlock):
-    question = blocks.CharBlock(label="Pregunta")
+    question = blocks.CharBlock(label="Question")
     answer = blocks.RichTextBlock(
-        label="Respuesta",
+        label="Answer",
         features=['bold', 'italic', 'link', 'ul', 'ol']
     )
 
@@ -618,17 +618,17 @@ class FAQItemBlock(blocks.StructBlock):
 
 class FAQSectionBlock(blocks.StructBlock):
     title = blocks.CharBlock(
-        default="Preguntas Frecuentes",
-        label="Título de la sección"
+        default="Frequently Asked Questions",
+        label="Section title"
     )
     subtitle = blocks.RichTextBlock(
-        default="Resolvemos tus dudas para que puedas enfocarte en lo que importa: <b>hacer crecer tu negocio.</b>",
-        label="Subtítulo",
+        default="We answer your questions so you can focus on what matters: <b>growing your business.</b>",
+        label="Subtitle",
         features=['bold', 'italic']
     )
     items = blocks.ListBlock(
         FAQItemBlock(),
-        label="Preguntas y respuestas",
+        label="Questions and answers",
         min_num=1
     )
 
@@ -636,53 +636,53 @@ class FAQSectionBlock(blocks.StructBlock):
         template = 'blocks/organisms/faq_section.html'
         icon = 'help'
         label = "FAQ Block"
-        group = "Secciones Principales"
+        group = "Main Sections"
 
 ###############################################################
-###Hero del area contacto################
+###Contact area hero########################
 ###############################################################
 
 class SplitHeroBlock(blocks.StructBlock):
     pre_title = blocks.CharBlock(
         default="Connect with",
         required=False,
-        label="Texto antes del título destacado"
+        label="Text before highlighted title"
     )
     highlighted_title = blocks.CharBlock(
         default="SaphinaGroup.com",
         required=True,
-        label="Título destacado (color primary)"
+        label="Highlighted title (primary color)"
     )
     subtitle = blocks.TextBlock(
         default="Your trusted sourcing and distribution partner in Latin America",
-        label="Subtítulo"
+        label="Subtitle"
     )
     bottom_image = ImageChooserBlock(
         required=True,
-        label="Imagen inferior (ej: camión, producto)"
+        label="Bottom image (e.g., truck, product)"
     )
     bg_color = blocks.CharBlock(
         default="#0d1117",
         required=False,
-        label="Color de fondo",
-        help_text="Código HEX del fondo oscuro"
+        label="Background color",
+        help_text="HEX code for dark background"
     )
     
-    # Opcional: altura
+    # Optional: height
     height = blocks.ChoiceBlock(
         choices=[
             ('70', '70vh'),
             ('85', '85vh (default)'),
         ],
         default='85',
-        label="Altura mínima"
+        label="Minimum height"
     )
 
     class Meta:
         template = 'blocks/organisms/split_hero.html'
         icon = 'image'
-        label = "Hero con imagen inferior"
-        group = "Secciones Principales"
+        label = "Hero with bottom image"
+        group = "Main Sections"
 
 
 class VideoLandingBlock(blocks.StructBlock):
@@ -702,8 +702,8 @@ class VideoLandingBlock(blocks.StructBlock):
     # --- BIO ---
     banner_bio_text = blocks.CharBlock(default="Click here and discover how to work with us NOW!", label="Bio Banner Text")
     bio_image = ImageChooserBlock(label="Profile Picture")
-    bio_nombre = blocks.CharBlock(default="RICARDO DOMINGUEZ", label="Name")
-    bio_cargo = blocks.CharBlock(default="Founder of AquiLoHay", label="Role/Subtitle")
+    bio_nombre = blocks.CharBlock(default="Saphinagroup", label="Name")
+    bio_cargo = blocks.CharBlock(default="", label="Role/Subtitle")
     bio_descripcion = blocks.RichTextBlock(label="Bio Description")
     boton_final_text = blocks.CharBlock(default="Watch the Video!", label="Final Button Text")
 
@@ -711,3 +711,4 @@ class VideoLandingBlock(blocks.StructBlock):
         template = 'home/blocks/video_landing.html'
         icon = 'media'
         label = 'Landing: Gated Video'
+        group = "Main Sections"
