@@ -39,7 +39,8 @@ saphina_db_data/
 
 # Ignoramos el override de Windows para que no ensucie el servidor
 docker-compose.override.yml
-
+Dockerfile-local
+docker-compose-local.yml
 # --- Archivos de Medios y Estáticos ---
 # En Git solo va el código, no las fotos que sube el cliente
 static/
