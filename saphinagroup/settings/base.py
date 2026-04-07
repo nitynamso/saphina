@@ -146,7 +146,7 @@ STATICFILES_FINDERS = [
 ]
 
 STATICFILES_DIRS = [
-    os.path.join(PROJECT_DIR, "static"),
+    os.path.join(BASE_DIR, "static_src"),
 ]
 
 # 2. Ruta de destino (Donde Docker y WhiteNoise los buscan)
