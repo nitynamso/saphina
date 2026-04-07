@@ -25,8 +25,8 @@
                     {% if slide.subtitle %}
                         <p class="text-lg lg:text-xl mb-8 text-gray-200">{{ slide.subtitle }}</p>
                     {% endif %}
-                    {% if slide.button_text %}
-                        <a href="{{ slide.button_link }}" class="inline-block bg-primary text-dark font-bold py-4 px-10 clip-btn hover:scale-105 transition-transform">
+                    {% if slide.button_text and slide.button_link %}
+                        <a href="#{{ slide.button_link }}" class="inline-block bg-primary text-dark font-bold py-4 px-10 clip-btn hover:scale-105 transition-transform">
                             {{ slide.button_text }}
                         </a>
                     {% endif %}

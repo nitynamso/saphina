@@ -120,7 +120,11 @@ class HeroSlideBlock(blocks.StructBlock):
     title = blocks.CharBlock(required=True)
     subtitle = blocks.TextBlock(required=False)
     button_text = blocks.CharBlock(required=False)
-    button_link = blocks.CharBlock(required=False)
+    button_link = blocks.CharBlock(
+    required=False, 
+    label="Target Section ID", 
+    help_text="Type the exact ID of the section you want to go to (Example: about-us, contact). DO NOT include the '#' symbol!"
+)
 
     class Meta:
         icon = 'image'
