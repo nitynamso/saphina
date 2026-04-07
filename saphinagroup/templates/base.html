@@ -195,6 +195,36 @@
 
         startAutoplay();
     }
+    const enlacesInternos = document.querySelectorAll('a[href^="#"]');
+
+    enlacesInternos.forEach(enlace => {
+        enlace.addEventListener('click', function (e) {
+           
+            e.preventDefault();
+
+          
+            const destinoId = this.getAttribute('href');
+            
+           
+            if (destinoId === '#') return;
+
+            const seccionDestino = document.querySelector(destinoId);
+
+            if (seccionDestino) {
+                
+                const alturaHeader = 100; 
+                
+                const posicionElemento = seccionDestino.getBoundingClientRect().top;
+                const posicionFinal = posicionElemento + window.pageYOffset - alturaHeader;
+
+                
+                window.scrollTo({
+                    top: posicionFinal,
+                    behavior: "smooth"
+                });
+            }
+        });
+    });
 });
     
 </script>
