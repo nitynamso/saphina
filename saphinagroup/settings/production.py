@@ -5,6 +5,7 @@ from .base import *
 # 1. DEBUG DINÁMICO
 # Ahora sí podrás activarlo desde el .env poniendo DEBUG=1
 DEBUG = True
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # 2. SECRET KEY
 # Obligatorio tenerla en el .env del servidor
 SECRET_KEY = os.environ.get("SECRET_KEY")
