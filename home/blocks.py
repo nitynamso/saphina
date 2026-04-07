@@ -588,11 +588,11 @@ class BrandsCarouselBlock(blocks.StructBlock):
         help_text="List of brand logos that will appear in the carousel"
     )
     button_text = blocks.CharBlock(
-        required=True,
-        default="Discover our catalog"
+        required=False,
+        
     )
     button_url = blocks.URLBlock(
-        required=True,
+        required=False,
         help_text="Button URL"
     )
 

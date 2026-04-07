@@ -89,15 +89,26 @@
     <main>
         {% block content %}{% endblock %}
     </main>
+{% if settings.home.WhatsAppSettings.mostrar_boton and settings.home.WhatsAppSettings.numero %}
+        <a href="https://wa.me/{{ settings.home.WhatsAppSettings.numero }}?text={{ settings.home.WhatsAppSettings.mensaje_por_defecto|urlencode }}" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           class="fixed bottom-6 right-6 lg:bottom-10 lg:right-10 z-[9999] flex items-center gap-4 group">
+            
+            <span class="hidden lg:block opacity-0 translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 bg-white text-dark text-sm font-bold py-2 px-4 rounded-xl shadow-xl transition-all duration-300 pointer-events-none border border-gray-100">
+               Chat with us!
+            </span>
 
+            <div class="w-14 h-14 lg:w-16 lg:h-16 bg-[#25D366] text-white rounded-full flex items-center justify-center text-3xl lg:text-4xl shadow-[0_4px_15px_rgba(37,211,102,0.4)] group-hover:scale-110 group-hover:shadow-[0_6px_25px_rgba(37,211,102,0.6)] transition-all duration-300 animate-bounce group-hover:animate-none">
+                <i class="fa-brands fa-whatsapp"></i>
+            </div>
+        </a>
+    {% endif %}
     <script src="{% static 'js/script.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.4/build/js/intlTelInput.min.js"></script>
     <script>
    
   document.addEventListener('DOMContentLoaded', () => {
-    // =========================================
-    // 1. INPUT DE TELÉFONO (Solo si existe el ID #telefono)
-    // =========================================
     const inputPhone = document.querySelector("#telefono");
     if (inputPhone) {
         window.intlTelInput(inputPhone, {
@@ -107,9 +118,6 @@
         });
     }
 
-    // =========================================
-    // 2. MENÚ MÓVIL (Hamburguesa)
-    // =========================================
     const hamburgerBtn = document.getElementById('hamburgerBtn');
     const nav = document.getElementById('mobileMenu');
     
@@ -136,26 +144,20 @@
         });
     }
 
-    // =========================================
-    // 3. ACORDEÓN FAQ (Togle de clase 'active')
-    // =========================================
     const headers = document.querySelectorAll('.accordion-header');
     if (headers.length > 0) {
         headers.forEach(header => {
             header.addEventListener('click', () => {
                 const item = header.parentElement;
-                // Opcional: Cerrar otros acordeones al abrir uno (estilo acordeón real)
-                // document.querySelectorAll('.accordion-item').forEach(i => {
-                //    if(i !== item) i.classList.remove('active');
-                // });
+              
+                document.querySelectorAll('.accordion-item').forEach(i => {
+                    if(i !== item) i.classList.remove('active');
+                 });
                 item.classList.toggle('active');
             });
         });
     }
 
-    // =========================================
-    // 4. HERO SLIDER (Solo si existen slides)
-    // =========================================
     const slides = document.querySelectorAll('.hero-slide');
     if (slides.length > 0) {
         let currentSlide = 0;

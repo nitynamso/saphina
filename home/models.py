@@ -108,7 +108,31 @@ class SiteSettings(BaseSiteSetting):
     ]
 
 
+@register_setting
+class WhatsAppSettings(BaseSiteSetting):
+    mostrar_boton = models.BooleanField(
+        default=True, 
+        help_text="Enable or disable the floating button across the entire website"
+    )
+    numero = models.CharField(
+        max_length=20, 
+        blank=True, 
+        help_text="E.g.:15615792949  (Numbers only, country code without the +)"
+    )
+    mensaje_por_defecto = models.TextField(
+        blank=True, 
+        default="Hello, I would like to get more information.", 
+        help_text="Message that will appear ready to send in the chat."
+    )
 
+    panels = [
+        FieldPanel('mostrar_boton'),
+        FieldPanel('numero'),
+        FieldPanel('mensaje_por_defecto'),
+    ]
+
+    class Meta:
+        verbose_name = "WhatsApp Button"
 
 
 # ==========================================
