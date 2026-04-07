@@ -466,8 +466,9 @@ class AboutUsBlock(blocks.StructBlock):
     
     # Section Footer
     texto_pie = blocks.RichTextBlock(required=False, label="Text before button")
-    boton_texto = blocks.CharBlock(required=False, label="Button text")
-    boton_url = blocks.URLBlock(required=False, label="Button link")
+    boton_texto = blocks.CharBlock(required=False, label="Button text", help_text="E.g., Write to us on WhatsApp")
+    whatsapp_numero = blocks.CharBlock(required=False, label="WhatsApp number", help_text="Include the country code without the + sign, e.g., +15615792949")
+    whatsapp_mensaje = blocks.TextBlock(required=False, label="Default message", help_text="This text will appear ready to send in the chat.")
 
     class Meta:
         template = 'blocks/about_us_block.html'

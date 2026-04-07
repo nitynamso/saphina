@@ -43,18 +43,25 @@
         </div> 
         
         {% if self.boton_texto %}
-        <div class=" mt-20 max-w-7xl text-center mx-auto">
+        <div class="mt-20 max-w-7xl text-center mx-auto">
             <div class="text-[1.15rem] lg:text-[1.4rem] leading-relaxed mb-8 text-[#333]">
                 {{ self.texto_pie|richtext }}
             </div>
             
-            <a href="{{ self.boton_url }}" target="_blank" 
-               class="inline-block bg-dark  text-primary font-bold py-5 px-14 text-[1.1rem] rounded transition-all hover:-translate-y-1 hover:bg-primary hover:text-dark hover:shadow-xl uppercase tracking-wider">
+            {# Construcción dinámica del enlace de WhatsApp #}
+            <a href="https://wa.me/{{ self.whatsapp_numero }}?text={{ self.whatsapp_mensaje|urlencode }}" target="_blank" 
+               class="inline-flex items-center justify-center gap-3 bg-dark text-primary font-bold py-5 px-14 text-[1.1rem] rounded transition-all hover:-translate-y-1 hover:bg-primary hover:text-dark hover:shadow-xl uppercase tracking-wider">
+                
+                {# Icono de WhatsApp #}
+                <i class="fa-brands fa-whatsapp text-2xl"></i>
+                
                 {{ self.boton_texto }}
             </a>
-            </div>
         </div>
         {% endif %}
+
+    </div>
+</section>
 
     </div>
 </section>
