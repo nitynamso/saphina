@@ -93,12 +93,134 @@
     <script src="{% static 'js/script.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.4/build/js/intlTelInput.min.js"></script>
     <script>
-    const inputPhone = document.querySelector("#telefono");
+   
+  document.addEventListener('DOMContentLoaded', () => {
+     const inputPhone = document.querySelector("#telefono");
   window.intlTelInput(inputPhone, {
     initialCountry: "us", 
     separateDialCode: true, 
     utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.4/build/js/utils.js",
   });
+    // =========================================
+    // 1. Lógica del Menú Móvil (Hamburguesa)
+    // =========================================
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const nav = document.getElementById('mobileMenu');
+    
+    if (hamburgerBtn && nav) {
+        const hamburgerIcon = hamburgerBtn.querySelector('i');
+
+        hamburgerBtn.addEventListener('click', () => {
+            nav.classList.toggle('mobile-menu-open');
+            
+            if(nav.classList.contains('mobile-menu-open')) {
+                hamburgerIcon.classList.remove('fa-bars');
+                hamburgerIcon.classList.add('fa-xmark');
+            } else {
+                hamburgerIcon.classList.remove('fa-xmark');
+                hamburgerIcon.classList.add('fa-bars');
+            }
+        });
+
+        const navLinks = nav.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('mobile-menu-open');
+                hamburgerIcon.classList.remove('fa-xmark');
+                hamburgerIcon.classList.add('fa-bars');
+            });
+        });
+    }
+
+    // =========================================
+    // 2. Selector de Idiomas (Dropdown)
+    // =========================================
+    const langToggle = document.getElementById('langToggle');
+    const langDropdown = document.getElementById('langDropdown');
+
+    if (langToggle && langDropdown) {
+        langToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            langDropdown.classList.toggle('hidden');
+            langDropdown.classList.toggle('flex');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!langDropdown.contains(e.target) && e.target !== langToggle) {
+                langDropdown.classList.add('hidden');
+                langDropdown.classList.remove('flex');
+            }
+        });
+    }
+
+    // =========================================
+    // 3. Lógica del Hero Slider
+    // =========================================
+    const slides = document.querySelectorAll('.hero-slide'); 
+    const prevBtn = document.getElementById('prevSlide');
+    const nextBtn = document.getElementById('nextSlide');
+    
+    if (slides.length > 0) {
+        let currentSlide = 0;
+        let sliderInterval;
+
+        const showSlide = (index) => {
+            slides.forEach(slide => slide.classList.remove('slide-active'));
+            
+            if (index >= slides.length) currentSlide = 0;
+            if (index < 0) currentSlide = slides.length - 1;
+            
+            slides[currentSlide].classList.add('slide-active');
+        };
+
+        const nextSlide = () => {
+            currentSlide++;
+            showSlide(currentSlide);
+        };
+
+        const prevSlide = () => {
+            currentSlide--;
+            showSlide(currentSlide);
+        };
+
+        const resetInterval = () => {
+            clearInterval(sliderInterval);
+            startAutoplay();
+        };
+
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                resetInterval();
+            });
+        }
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                resetInterval();
+            });
+        }
+
+        const startAutoplay = () => {
+            sliderInterval = setInterval(nextSlide, 7000);
+        };
+
+        startAutoplay();
+    }
+
+    // =========================================
+    // 4. ACORDEÓN FAQ - CORREGIDO
+    // =========================================
+    const headers = document.querySelectorAll('.accordion-header');
+            headers.forEach(header => {
+                header.addEventListener('click', () => {
+                    const item = header.parentElement;
+                    item.classList.toggle('active');
+                });
+            });
+    
+});
     
 </script>
     
