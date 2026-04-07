@@ -146,18 +146,19 @@ STATICFILES_FINDERS = [
 ]
 
 STATICFILES_DIRS = [
-    PROJECT_DIR / "static",
+    os.path.join(PROJECT_DIR, "static"),
 ]
-STATIC_URL = "/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
+# 2. Ruta de destino (Donde Docker y WhiteNoise los buscan)
+# En producción con Docker, lo ideal es que sea una ruta absoluta simple
+STATIC_ROOT = "/app/static"
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# 3. Media (Imágenes que subes desde el admin)
+MEDIA_ROOT = "/app/media"
 MEDIA_URL = "/media/"
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static_src"), 
-]
+# 4. URL pública
+STATIC_URL = "/static/"
 
 # Default storage settings
 # See https://docs.djangoproject.com/en/6.0/ref/settings/#std-setting-STORAGES
