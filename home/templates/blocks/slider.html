@@ -21,10 +21,16 @@
             
             <div class="relative z-20 h-full flex items-center px-[5%] lg:px-[8%] text-white">
                 <div class="max-w-[700px]">
-                    <h1 class="text-[2.5rem] lg:text-[4rem] font-extrabold mb-4 leading-tight">{{ slide.title }}</h1>
+                    <h1 class="text-balance text-[2.5rem] lg:text-[4rem] font-extrabold mb-4 leading-tight">
+                        {{ slide.title }}
+                    </h1>
+                    
                     {% if slide.subtitle %}
-                        <p class="text-lg lg:text-xl mb-8 text-gray-200">{{ slide.subtitle }}</p>
+                        <p class="text-pretty text-lg lg:text-xl mb-8 text-gray-200">
+                            {{ slide.subtitle }}
+                        </p>
                     {% endif %}
+                    
                     {% if slide.button_text and slide.button_link %}
                         <a href="#{{ slide.button_link }}" class="inline-block bg-primary text-dark font-bold py-4 px-10 clip-btn hover:scale-105 transition-transform">
                             {{ slide.button_text }}
