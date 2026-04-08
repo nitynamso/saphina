@@ -11,7 +11,6 @@
         {% if self.brands %}
         <div class="brands-wrapper relative w-full mx-auto mb-10 lg:mb-16 overflow-hidden py-8 mask-fade">
             <div class="flex items-center track-animation">
-                <!-- Primera copia de logos -->
                 {% for brand in self.brands %}
                 <div class="slide-item px-6 flex justify-center items-center">
                     {% if brand.logo_image %}
@@ -26,7 +25,6 @@
                     {% endif %}
                 </div>
                 {% endfor %}
-                <!-- Segunda copia para efecto infinito -->
                 {% for brand in self.brands %}
                 <div class="slide-item px-6 flex justify-center items-center">
                     {% if brand.logo_image %}
@@ -44,11 +42,14 @@
             </div>
         </div>
         {% endif %}
-
-        <a href="{{ self.button_url }}" 
+        
+        
+        {% if self.button_text %}
+        <a href="{{ self.button_url|default:'#' }}" 
            class="inline-block bg-dark text-white hover:text-dark hover:bg-primary font-medium py-4 px-10 text-[1.1rem] rounded transition-all hover:-translate-y-1 hover:shadow-xl">
             {{ self.button_text }}
         </a>
+        {% endif %}
 
     </div>
 </section>
