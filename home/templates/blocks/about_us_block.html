@@ -48,15 +48,15 @@
                 {{ self.texto_pie|richtext }}
             </div>
             
-            {# Construcción dinámica del enlace de WhatsApp #}
-            <a href="https://wa.me/{{ self.whatsapp_numero }}?text={{ self.whatsapp_mensaje|urlencode }}" target="_blank" 
-               class="text-nowrap inline-flex items-center justify-center gap-3 bg-dark text-primary font-bold py-5 px-14 text-[1.1rem] rounded transition-all hover:-translate-y-1 hover:bg-primary hover:text-dark hover:shadow-xl uppercase tracking-wider">
-                
-                {# Icono de WhatsApp #}
-                <i class="fa-brands fa-whatsapp text-2xl"></i>
-                
-                {{ self.boton_texto }}
-            </a>
+          {# Construcción dinámica del enlace de WhatsApp #}
+<a href="https://wa.me/{{ self.whatsapp_numero }}?text={{ self.whatsapp_mensaje|urlencode }}" target="_blank" 
+   class="inline-flex items-center justify-center gap-2 lg:gap-3 bg-dark text-primary font-bold py-3 px-6 lg:py-5 lg:px-14 text-[0.9rem] lg:text-[1.1rem] rounded transition-all hover:-translate-y-1 hover:bg-primary hover:text-dark hover:shadow-xl uppercase tracking-wider text-center">
+    
+    {# Icono de WhatsApp #}
+    <i class="fa-brands fa-whatsapp text-xl lg:text-2xl shrink-0"></i>
+    
+    <span>{{ self.boton_texto }}</span>
+</a>
         </div>
         {% endif %}
 
