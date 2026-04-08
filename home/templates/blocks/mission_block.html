@@ -4,7 +4,6 @@
     <div class="max-w-[125rem] mx-auto px-[5%] grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
         
         {% if self.image_position == 'left' %}
-            <!-- Imagen a la izquierda en escritorio -->
             <div class="w-full">
                 {% if self.image %}
                     {% image self.image original class="w-full h-auto rounded object-cover shadow-lg" %}
@@ -13,20 +12,19 @@
                 {% endif %}
             </div>
             <div>
-                <h2 class="text-[2.5rem] lg:text-[3.5rem] font-bold text-dark mb-6 leading-tight">
+                <h2 class="text-balance !hyphens-none break-normal text-[1.8rem] lg:text-[3.5rem] font-bold text-dark mb-6 leading-tight">
                     {{ self.title|linebreaksbr }}
                 </h2>
-                <p class="text-[1.15rem] lg:text-[1.25rem] text-[#333] leading-relaxed">
+                <p class="text-pretty !hyphens-none break-normal text-[1.1rem] lg:text-[1.25rem] text-[#333] leading-relaxed">
                     {{ self.description }}
                 </p>
             </div>
         {% else %}
-            <!-- Texto a la izquierda, imagen a la derecha (por defecto) -->
             <div>
-                <h2 class="text-[2.5rem] lg:text-[3.5rem] font-bold text-dark mb-6 leading-tight">
+                <h2 class="text-balance !hyphens-none break-normal text-[1.8rem] lg:text-[3.5rem] font-bold text-dark mb-6 leading-tight">
                     {{ self.title|linebreaksbr }}
                 </h2>
-                <p class="text-[1.15rem] lg:text-[1.25rem] text-[#333] leading-relaxed">
+                <p class="text-pretty !hyphens-none break-normal text-[1.1rem] lg:text-[1.25rem] text-[#333] leading-relaxed">
                     {{ self.description }}
                 </p>
             </div>

@@ -1,28 +1,28 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
-<section class="bg-cardBg py-20 lg:py-28">
+<section class="bg-cardBg py-16 lg:py-28">
     <div class="w-full max-w-[100rem] mx-auto px-[5%] lg:px-[2.5%]">
         
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-[3rem] items-start">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-[3rem] items-start">
             
             <div class="w-full">
                 {% image self.image fill-900x1000 as img %}
-                <img src="{{ img.url }}" alt="{{ img.alt }}" class="w-full h-auto object-cover block shadow-sm">
+                <img src="{{ img.url }}" alt="{{ img.alt }}" class="w-full h-auto object-cover block shadow-sm rounded-lg">
             </div>
 
             <div>
-                <h3 class="text-balance text-[2.5rem] lg:text-[4rem] leading-[1.2] lg:leading-[4.2rem] font-medium text-[#333] mb-6">
+                <h3 class="text-balance !hyphens-none break-normal text-[1.8rem] lg:text-[4rem] leading-[1.2] lg:leading-[4.2rem] font-medium text-[#333] mb-6">
                     {{ self.title|linebreaksbr }}
                 </h3>
                 
-                <div class="text-pretty text-[1.2rem] lg:text-[1.4rem] leading-relaxed text-[#333] mb-6">
+                <div class="text-pretty !hyphens-none break-normal text-[1.1rem] lg:text-[1.4rem] leading-relaxed text-[#333] mb-6">
                     {{ self.intro_text|richtext }}
                 </div>
 
                 {% if self.benefits %}
                 <ul class="flex flex-col gap-5 mt-10">
                     {% for benefit in self.benefits %}
-                    <li class="text-pretty flex items-start gap-4 text-[1.2rem] lg:text-[1.3rem] font-semibold text-[#333] leading-snug">
+                    <li class="text-pretty !hyphens-none break-normal flex items-start gap-4 text-[1.1rem] lg:text-[1.3rem] font-semibold text-[#333] leading-snug">
                         <svg class="shrink-0 w-6 h-6 mt-1" viewBox="0 0 24 24" fill="none">
                             <circle cx="12" cy="12" r="12" fill="#FFD731"/>
                             <path d="M9.43627 14.6045C9.43627 14.6045 6.95183 12.8142 4 12.1626L9.74787 19L19.9972 5.00439C19.9972 5.00439 12.8541 9.06895 9.43627 14.6045Z" fill="black"/>
