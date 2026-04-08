@@ -6,12 +6,14 @@
          style="background-image: url('{{ bg_image.url }}');">
     </div>
     <div class="absolute inset-0 bg-black/40 z-10 pointer-events-none"></div>
+    
     <div class="relative z-20 max-w-[800px] mt-16">
-        <h1 class="text-white text-[3rem] lg:text-[4.5rem] font-extrabold leading-[1.1] mb-6 drop-shadow-lg">
+        <h1 class="text-balance text-white text-[3rem] lg:text-[4.5rem] font-extrabold leading-[1.1] mb-6 drop-shadow-lg">
             {{ value.title }}
         </h1>
+        
         {% if value.subtitle %}
-            <p class="text-[1.2rem] lg:text-[1.5rem] font-normal text-gray-200 leading-relaxed">
+            <p class="text-pretty text-[1.2rem] lg:text-[1.5rem] font-normal text-gray-200 leading-relaxed">
                 {{ value.subtitle|linebreaksbr }}
             </p>
         {% endif %}
