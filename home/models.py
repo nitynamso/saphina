@@ -55,7 +55,7 @@ class GlobalHeader(PreviewableMixin, models.Model):
 
     # --- TOP BAR (BANNER) ---
     address = models.CharField(max_length=255, default="13463 N W 19th Lane, Miami, FL 33182", verbose_name="Address")
-    phone = models.CharField(max_length=50, default="+1 (786) 847-5568", verbose_name="Phone")
+    phone = models.CharField(max_length=50, default="+1 (786) 847-5568", verbose_name="Phone",  )
     
     # --- STYLES ---
     bg_color = models.CharField(max_length=7, default="#FAD02C", verbose_name="Banner Background Color (Hex)")
